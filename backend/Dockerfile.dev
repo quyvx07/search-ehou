@@ -1,0 +1,40 @@
+# Development stage
+FROM node:20-alpine AS development
+
+# Enable Corepack for Yarn
+RUN corepack enable
+
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY yarn.lock ./
+
+# Install all dependencies (including dev dependencies)
+RUN yarn install
+
+# Copy source code
+COPY . .
+
+# Install dependencies again (in case package.json changed)
+RUN yarn install
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nestjs -u 1001
+
+# Create dist directory and set permissions
+RUN mkdir -p /app/dist && chown -R nestjs:nodejs /app
+
+# Switch to non-root user
+USER nestjs
+
+# Expose port
+EXPOSE 3000
+
+# Default command for development
+CMD ["yarn", "start:dev"]

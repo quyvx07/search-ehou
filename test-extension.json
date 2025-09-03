@@ -1,0 +1,50 @@
+{
+  "testData": [
+    {
+      "courseId": "test-course-123",
+      "questionHtml": "<p>Câu hỏi có đáp án đúng - Test 1</p>",
+      "answersHtml": [
+        "Đáp án A",
+        "Đáp án B",
+        "Đáp án C",
+        "Đáp án D"
+      ],
+      "correctAnswersHtml": [
+        "Đáp án B"
+      ],
+      "explanationHtml": "<p>Giải thích đáp án đúng</p>"
+    },
+    {
+      "courseId": "test-course-123",
+      "questionHtml": "<p>Câu hỏi có đáp án đúng - Test 2</p>",
+      "answersHtml": [
+        "Đáp án A",
+        "Đáp án B",
+        "Đáp án C"
+      ],
+      "correctAnswersHtml": [
+        "Đáp án A",
+        "Đáp án C"
+      ],
+      "explanationHtml": "<p>Câu hỏi nhiều đáp án đúng</p>"
+    },
+    {
+      "courseId": "test-course-123",
+      "questionHtml": "<p>Câu hỏi KHÔNG có đáp án đúng - Test 3</p>",
+      "answersHtml": [
+        "Đáp án A",
+        "Đáp án B",
+        "Đáp án C"
+      ],
+      "correctAnswersHtml": [],
+      "explanationHtml": ""
+    }
+  ],
+  "expectedResult": {
+    "totalQuestionsFound": 3,
+    "validQuestions": 2,
+    "questionsSkipped": 1,
+    "validQuestionIndexes": [0, 1],
+    "skippedQuestionIndexes": [2]
+  }
+}

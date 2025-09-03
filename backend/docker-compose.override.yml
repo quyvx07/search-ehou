@@ -1,0 +1,98 @@
+services:
+  # Override backend service for development
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: development
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+      - ./logs:/app/logs
+    environment:
+      # Database
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      - DB_DATABASE=search_ehou
+      - DB_SYNCHRONIZE=true
+      - DB_LOGGING=true
+      # Redis
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=search_ehou_redis_password
+      - REDIS_DB=0
+      - CACHE_TTL=300
+      - CACHE_MAX_ITEMS=1000
+      # Elasticsearch
+      - ELASTICSEARCH_NODE=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=changeme123
+      # Application
+      - PORT=3000
+      - NODE_ENV=development
+      # Swagger
+      - SWAGGER_TITLE=Search EHOU API
+      - SWAGGER_DESCRIPTION=API for Search EHOU Chrome Extension
+      - SWAGGER_VERSION=1.0
+      # Performance
+      - PERFORMANCE_MONITORING_ENABLED=true
+      - PERFORMANCE_SLOW_REQUEST_THRESHOLD=500
+      - PERFORMANCE_MAX_METRICS=10000
+      # Security
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - JWT_EXPIRES_IN=24h
+      # Data Protection
+      - ENCRYPTION_MASTER_KEY=your-encryption-master-key-32-chars-long
+      - BACKUP_ENABLED=true
+      - BACKUP_SCHEDULE=0 3 * * *
+      - BACKUP_RETENTION_DAYS=30
+      - BACKUP_PATH=./backups
+      - BACKUP_INCLUDE_AUDIT_LOGS=false
+      - BACKUP_COMPRESSION=true
+      - BACKUP_ENCRYPTION=true
+      - BACKUP_ENCRYPTION_KEY=your-backup-encryption-key-32-chars
+      # Data Retention
+      - DATA_RETENTION_QUESTIONS_DAYS=2555
+      - DATA_RETENTION_COURSES_DAYS=3650
+      - DATA_RETENTION_AUDIT_LOGS_DAYS=1095
+      - DATA_RETENTION_SEARCH_LOGS_DAYS=365
+      - DATA_ANONYMIZE_QUESTIONS_DAYS=1095
+      - DATA_ANONYMIZE_COURSES_DAYS=1825
+      - DATA_ANONYMIZE_SEARCH_LOGS_DAYS=90
+    command: yarn start:dev
+    networks:
+      - search_ehou_network
+
+  # Override PostgreSQL for development
+  postgres:
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: search_ehou
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+
+  # Override Redis for development
+  redis:
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass search_ehou_redis_password
+
+  # Override Elasticsearch for development
+  elasticsearch:
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - ELASTIC_PASSWORD=changeme123
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data

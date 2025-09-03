@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+<html  dir="ltr" lang="vi" xml:lang="vi">
+<head>
+    <title>Bài luyện tập trắc nghiệm 01 - LTTN01</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+	<meta name="viewport" content="target-densitydpi=device-dpi" /> 
+	<meta name="HandheldFriendly" content="true"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, target-densitydpi=medium-dpi, minimal-ui" /> -->
+    <link rel="shortcut icon" href="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme/1739846736/favicon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="moodle, Bài luyện tập trắc nghiệm 01 - LTTN01" />
+<script type="text/javascript">
+//<![CDATA[
+var M = {}; M.yui = {};
+M.pageloadstarttime = new Date();
+M.cfg = {"wwwroot":"https:\/\/learning.ehou.edu.vn","sesskey":"TtvliCrm9f","loadingicon":"https:\/\/learning.ehou.edu.vn\/theme\/image.php\/coursemos\/core\/1739846736\/i\/loading_small","themerev":"1739846736","slasharguments":1,"theme":"coursemos","jsrev":"1739846736","svgicons":true};var yui1ConfigFn = function(me) {if(/-skin|reset|fonts|grids|base/.test(me.name)){me.type='css';me.path=me.path.replace(/\.js/,'.css');me.path=me.path.replace(/\/yui2-skin/,'/assets/skins/sam/yui2-skin')}};
+var yui2ConfigFn = function(me) {var parts=me.name.replace(/^moodle-/,'').split('-'),component=parts.shift(),module=parts[0],min='-min';if(/-(skin|core)$/.test(me.name)){parts.pop();me.type='css';min=''};if(module){var filename=parts.join('-');me.path=component+'/'+module+'/'+filename+min+'.'+me.type}else me.path=component+'/'+component+'.'+me.type};
+YUI_config = {"debug":false,"base":"https:\/\/learning.ehou.edu.vn\/lib\/yuilib\/3.17.2\/","comboBase":"https:\/\/learning.ehou.edu.vn\/theme\/yui_combo.php?","combine":true,"filter":null,"insertBefore":"firstthemesheet","groups":{"yui2":{"base":"https:\/\/learning.ehou.edu.vn\/lib\/yuilib\/2in3\/2.9.0\/build\/","comboBase":"https:\/\/learning.ehou.edu.vn\/theme\/yui_combo.php?","combine":true,"ext":false,"root":"2in3\/2.9.0\/build\/","patterns":{"yui2-":{"group":"yui2","configFn":yui1ConfigFn}}},"moodle":{"name":"moodle","base":"https:\/\/learning.ehou.edu.vn\/theme\/yui_combo.php?m\/1739846736\/","combine":true,"comboBase":"https:\/\/learning.ehou.edu.vn\/theme\/yui_combo.php?","ext":false,"root":"m\/1739846736\/","patterns":{"moodle-":{"group":"moodle","configFn":yui2ConfigFn}},"filter":null,"modules":{"moodle-core-formchangechecker":{"requires":["base","event-focus"]},"moodle-core-notification":{"requires":["moodle-core-notification-dialogue","moodle-core-notification-alert","moodle-core-notification-confirm","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-core-notification-dialogue":{"requires":["base","node","panel","escape","event-key","dd-plugin","moodle-core-widget-focusafterclose","moodle-core-lockscroll"]},"moodle-core-notification-alert":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-confirm":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-exception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-ajaxexception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-handlebars":{"condition":{"trigger":"handlebars","when":"after"}},"moodle-core-popuphelp":{"requires":["moodle-core-tooltip"]},"moodle-core-maintenancemodetimer":{"requires":["base","node"]},"moodle-core-actionmenu":{"requires":["base","event","node-event-simulate"]},"moodle-core-blocks":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification"]},"moodle-core-tooltip":{"requires":["base","node","io-base","moodle-core-notification-dialogue","json-parse","widget-position","widget-position-align","event-outside","cache-base"]},"moodle-core-dragdrop":{"requires":["base","node","io","dom","dd","event-key","event-focus","moodle-core-notification"]},"moodle-core-formautosubmit":{"requires":["base","event-key"]},"moodle-core-lockscroll":{"requires":["plugin","base-build"]},"moodle-core-dock":{"requires":["base","node","event-custom","event-mouseenter","event-resize","escape","moodle-core-dock-loader"]},"moodle-core-dock-loader":{"requires":["escape"]},"moodle-core-event":{"requires":["event-custom"]},"moodle-core-chooserdialogue":{"requires":["base","panel","moodle-core-notification"]},"moodle-core-checknet":{"requires":["base-base","moodle-core-notification-alert","io-base"]},"moodle-core_availability-form":{"requires":["base","node","event","panel","moodle-core-notification-dialogue","json"]},"moodle-backup-backupselectall":{"requires":["node","event","node-event-simulate","anim"]},"moodle-backup-confirmcancel":{"requires":["node","node-event-simulate","moodle-core-notification-confirm"]},"moodle-calendar-eventmanager":{"requires":["base","node","event-mouseenter","overlay","moodle-calendar-eventmanager-skin"]},"moodle-course-management":{"requires":["base","node","io-base","moodle-core-notification-exception","json-parse","dd-constrain","dd-proxy","dd-drop","dd-delegate","node-event-delegate"]},"moodle-course-modchooser":{"requires":["moodle-core-chooserdialogue","moodle-course-coursebase"]},"moodle-course-formatchooser":{"requires":["base","node","node-event-simulate"]},"moodle-course-categoryexpander":{"requires":["node","event-key"]},"moodle-course-toolboxes":{"requires":["node","base","event-key","node","io","moodle-course-coursebase","moodle-course-util"]},"moodle-course-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-course-coursebase","moodle-course-util"]},"moodle-course-util":{"requires":["node"],"use":["moodle-course-util-base"],"submodules":{"moodle-course-util-base":{},"moodle-course-util-section":{"requires":["node","moodle-course-util-base"]},"moodle-course-util-cm":{"requires":["node","moodle-course-util-base"]}}},"moodle-form-shortforms":{"requires":["node","base","selector-css3","moodle-core-event"]},"moodle-form-dateselector":{"requires":["base","node","overlay","calendar"]},"moodle-form-showadvanced":{"requires":["node","base","selector-css3"]},"moodle-form-passwordunmask":{"requires":["node","base"]},"moodle-question-qbankmanager":{"requires":["node","selector-css3"]},"moodle-question-searchform":{"requires":["base","node"]},"moodle-question-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-question-preview":{"requires":["base","dom","event-delegate","event-key","core_question_engine"]},"moodle-availability_completion-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_date-form":{"requires":["base","node","event","io","moodle-core_availability-form"]},"moodle-availability_grade-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_group-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_grouping-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_profile-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-mod_assign-history":{"requires":["node","transition"]},"moodle-mod_bigbluebuttonbn-modform":{"requires":["base","node"]},"moodle-mod_forum-subscriptiontoggle":{"requires":["base-base","io-base"]},"moodle-mod_quiz-autosave":{"requires":["base","node","event","event-valuechange","node-event-delegate","io-form"]},"moodle-mod_quiz-repaginate":{"requires":["base","event","node","io","moodle-core-notification-dialogue"]},"moodle-mod_quiz-quizbase":{"requires":["base","node"]},"moodle-mod_quiz-toolboxes":{"requires":["base","node","event","event-key","io","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-slot","moodle-core-notification-ajaxexception"]},"moodle-mod_quiz-questionchooser":{"requires":["moodle-core-chooserdialogue","moodle-mod_quiz-util","querystring-parse"]},"moodle-mod_quiz-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-base","moodle-mod_quiz-util-page","moodle-mod_quiz-util-slot","moodle-course-util"]},"moodle-mod_quiz-quizquestionbank":{"requires":["base","event","node","io","io-form","yui-later","moodle-question-qbankmanager","moodle-core-notification-dialogue"]},"moodle-mod_quiz-randomquestion":{"requires":["base","event","node","io","moodle-core-notification-dialogue"]},"moodle-mod_quiz-util":{"requires":["node"],"use":["moodle-mod_quiz-util-base"],"submodules":{"moodle-mod_quiz-util-base":{},"moodle-mod_quiz-util-slot":{"requires":["node","moodle-mod_quiz-util-base"]},"moodle-mod_quiz-util-page":{"requires":["node","moodle-mod_quiz-util-base"]}}},"moodle-mod_quiz-modform":{"requires":["base","node","event"]},"moodle-mod_videofile-videojs":{"requires":["base","node","event"]},"moodle-message_airnotifier-toolboxes":{"requires":["base","node","io"]},"moodle-block_navigation-navigation":{"requires":["base","io-base","node","event-synthetic","event-delegate","json-parse"]},"moodle-filter_glossary-autolinker":{"requires":["base","node","io-base","json-parse","event-delegate","overlay","moodle-core-event","moodle-core-notification-alert","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-filter_mathjaxloader-loader":{"requires":["moodle-core-event"]},"moodle-editor_atto-rangy":{"requires":[]},"moodle-editor_atto-editor":{"requires":["node","transition","io","overlay","escape","event","event-simulate","event-custom","node-event-html5","yui-throttle","moodle-core-notification-dialogue","moodle-core-notification-confirm","moodle-editor_atto-rangy","handlebars","timers"]},"moodle-editor_atto-plugin":{"requires":["node","base","escape","event","event-outside","handlebars","event-custom","timers"]},"moodle-editor_atto-menu":{"requires":["moodle-core-notification-dialogue","node","event","event-custom"]},"moodle-report_eventlist-eventfilter":{"requires":["base","event","node","node-event-delegate","datatable","autocomplete","autocomplete-filters"]},"moodle-report_loglive-fetchlogs":{"requires":["base","event","node","io","node-event-delegate"]},"moodle-report_overviewstats-charts":{"requires":["base","node","charts","charts-legend"]},"moodle-gradereport_grader-gradereporttable":{"requires":["base","node","event","handlebars","overlay","event-hover"]},"moodle-gradereport_history-userselector":{"requires":["escape","event-delegate","event-key","handlebars","io-base","json-parse","moodle-core-notification-dialogue"]},"moodle-tool_capability-search":{"requires":["base","node"]},"moodle-tool_monitor-dropdown":{"requires":["base","event","node"]},"moodle-theme_bootstrap-bootstrap":{"requires":["node","selector-css3"]},"moodle-theme_bootstrap-zoom":{"requires":["node"]},"moodle-theme_bootstrapbase-bootstrap":{"requires":["node","selector-css3"]},"moodle-assignfeedback_editpdf-editor":{"requires":["base","event","node","io","graphics","json","event-move","event-resize","querystring-stringify-simple","moodle-core-notification-dialog","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-atto_accessibilitychecker-button":{"requires":["color-base","moodle-editor_atto-plugin"]},"moodle-atto_accessibilityhelper-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_align-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_bold-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_charmap-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_clear-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_collapse-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emoticon-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_equation-button":{"requires":["moodle-editor_atto-plugin","moodle-core-event","io","event-valuechange","tabview","array-extras"]},"moodle-atto_html-button":{"requires":["moodle-editor_atto-plugin","event-valuechange"]},"moodle-atto_image-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_indent-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_italic-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_link-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-usedfiles":{"requires":["node","escape"]},"moodle-atto_managefiles-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_media-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_noautolink-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_orderedlist-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_rtl-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_strike-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_subscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_superscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_table-button":{"requires":["moodle-editor_atto-plugin","moodle-editor_atto-menu","event","event-valuechange"]},"moodle-atto_title-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_underline-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_undo-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_unorderedlist-button":{"requires":["moodle-editor_atto-plugin"]}}},"gallery":{"name":"gallery","base":"https:\/\/learning.ehou.edu.vn\/lib\/yuilib\/gallery\/","combine":true,"comboBase":"https:\/\/learning.ehou.edu.vn\/theme\/yui_combo.php?","ext":false,"root":"gallery\/1739846736\/","patterns":{"gallery-":{"group":"gallery"}}}},"modules":{"core_filepicker":{"name":"core_filepicker","fullpath":"https:\/\/learning.ehou.edu.vn\/lib\/javascript.php\/1739846736\/repository\/filepicker.js","requires":["base","node","node-event-simulate","json","async-queue","io-base","io-upload-iframe","io-form","yui2-treeview","panel","cookie","datatable","datatable-sort","resize-plugin","dd-plugin","escape","moodle-core_filepicker"]},"core_question_flags":{"name":"core_question_flags","fullpath":"https:\/\/learning.ehou.edu.vn\/lib\/javascript.php\/1739846736\/question\/flags.js","requires":["base","dom","event-delegate","io-base"]},"mathjax":{"name":"mathjax","fullpath":"https:\/\/cdn.mathjax.org\/mathjax\/2.3-latest\/MathJax.js?delayStartupUntil=configured"},"core_question_engine":{"name":"core_question_engine","fullpath":"https:\/\/learning.ehou.edu.vn\/lib\/javascript.php\/1739846736\/question\/qengine.js","requires":["node","event"]},"mod_quiz":{"name":"mod_quiz","fullpath":"https:\/\/learning.ehou.edu.vn\/lib\/javascript.php\/1739846736\/mod\/quiz\/module.js","requires":["base","dom","event-delegate","event-key","core_question_engine","moodle-core-formchangechecker"]}}};
+M.yui.loader = {modules: {}};
+
+//]]>
+</script>
+<link rel="stylesheet" type="text/css" href="https://learning.ehou.edu.vn/theme/yui_combo.php?rollup/3.17.2/yui-moodlesimple-min.css" /><script type="text/javascript" src="https://learning.ehou.edu.vn/theme/yui_combo.php?rollup/3.17.2/yui-moodlesimple-min.js&amp;rollup/1739846736/mcore-min.js"></script><script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/core/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/core/ui-1.11.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/theme_coursemos/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/theme_coursemos/jquery.cookie.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/theme_coursemos/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/theme_coursemos/jquery.validate.methods.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/theme_coursemos/jquery.validate.en.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/theme_coursemos/jquery.dotdotdot.min.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/theme_coursemos/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/jquery.php/theme_coursemos/jquery.lightSlider.min.js"></script>
+<script id="firstthemesheet" type="text/css">/** Required in order to fix style inclusion problems in IE with YUI **/</script><link rel="stylesheet" type="text/css" href="https://learning.ehou.edu.vn/theme/styles.php/coursemos/1739846736/all" />
+<script type="text/javascript" src="https://learning.ehou.edu.vn/lib/javascript.php/1739846736/lib/javascript-static.js"></script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/javascript.php/coursemos/1739846736/head"></script>
+    <script type="text/javascript">
+		$(function() {
+					});
+    </script>
+	<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/coursemos/jquery/jquery.session.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://learning.ehou.edu.vn/theme/coursemos/style/theme.default.min.css">
+	<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/coursemos/jquery/jquery.tablesorter.min.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-63208942-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+</head>
+<body id="page-mod-quiz-review" class="format-ubsweeks  path-mod path-mod-quiz safari dir-ltr lang-vi yui-skin-sam yui3-skin-sam learning-ehou-edu-vn pagelayout-incourse course-22327 context-1370957 cmid-1205542 category-126 device_default">
+<div class="skiplinks"><a class="skip" href="#maincontent">Chuyển tới nội dung chính</a></div>
+<script type="text/javascript">
+//<![CDATA[
+document.body.className += ' jsenabled';
+//]]>
+</script>
+
+<div id="page">
+	<div id="page-header" class="header">
+	
+<div class="navbar navbar-default navbar-fixed-top">
+	<div class="left-menu">
+		<button type="button" data-loginned="1" class="nobtn menu-toggle left-menu-toggle "></button>
+	   	<button type="button" class="nobtn menu-toggle menu-home" data-url="https://learning.ehou.edu.vn"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>	</div>
+	
+	<div class="right-menu">
+		<div class="btn searchmobile">	
+				<form id="coursesearch" action="https://learning.ehou.edu.vn/course/search.php" method="get" class="form-inline" role="form"><div class="input-group"><label for="coursesearchbox" class="sr-only">Tìm kiếm lớp môn</label><input type="text" id="coursesearchbox" size="15" name="search" class="form-control" value="" placeholder="Tìm kiếm lớp môn"><span class="input-group-btn"><button type="submit" class="btn btn-default">Xem</button></span></div></form>
+		</div>
+		<div class="top_buttons"></div><div class="logout"><a href="https://learning.ehou.edu.vn/login/logout.php?sesskey=TtvliCrm9f">Thoát</a></div><div class="dropdown langdropdown"><button id="user-language" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nobtn dropdown-toggle">vietnamese (vi)<span class="caret"></span></button><ul class="dropdown-menu" role="menu" aria-labelledby="user-language"><li><a href="https://learning.ehou.edu.vn/mod/quiz/review.php?attempt=14402132&amp;lang=en" title="English (en)">English (en)</a><span class="natinal_flag"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme_coursemos/1739846736/flag/en" alt="en" /></span></li><li><a href="https://learning.ehou.edu.vn/mod/quiz/review.php?attempt=14402132&amp;lang=vi" title="vietnamese (vi)">vietnamese (vi)</a><span class="natinal_flag"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme_coursemos/1739846736/flag/vi" alt="vi" /></span></li><li><a href="https://learning.ehou.edu.vn/mod/quiz/review.php?attempt=14402132&amp;lang=ko" title="한국어 (ko)">한국어 (ko)</a><span class="natinal_flag"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme_coursemos/1739846736/flag/ko" alt="ko" /></span></li></ul></div>		<button type="button" data-loginned="1"  class="nobtn menu-toggle right-menu-toggle "></button>
+	</div>
+	<div class="container-fluid">
+		<div class="coursename home-coursename"><h2><a href="https://learning.ehou.edu.vn/course/view.php?id=22327">Kiến trúc máy tính - IT02.059</a></h2></div>	</div>
+</div>	</div>
+	<div id="page-coursemos" class="content_container clearfix  left-expand  right-expand ">
+		<div id="page-coursemos-content">
+						<div id="page-content" class="clearfix">
+				<div id="region-main">
+					<div class="region-content">
+						<div class="section_progress">
+	<div class="progress">
+<div class="progress-bar progress-bar-success" style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327" class="section-all">Giới thiệu</a></div><div class="progress-bar  progress-bar-success  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=1" title="Tuần 1 - (20/7/2025) Tìm hiểu nội dung môn học. " data-toggle="tooltip"><div class="section_name"> Tuần 1 - (20/7/2025) Tìm hiểu nội dung môn học. </div></a></div><div class="progress-bar  progress-bar-success  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=2" title="Tuần 2 - (21/7/2025 - 27/7/2025)  Bài 1: Kiến trúc cơ bản của máy tính điện tử " data-toggle="tooltip"><div class="section_name"> Tuần 2 - (21/7/2025 - 27/7/2025)  Bài 1: Kiến trúc cơ bản của máy tính điện tử </div></a></div><div class="progress-bar  progress-bar-success  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=3" title="Tuần 3 - (28/7/2025 - 03/8/2025)  Bài 2: Đơn vị xử lý trung tâm" data-toggle="tooltip"><div class="section_name"> Tuần 3 - (28/7/2025 - 03/8/2025)  Bài 2: Đơn vị xử lý trung tâm</div></a></div><div class="progress-bar  progress-bar-success  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=4" title="Tuần 4 - (04/8/2025 - 10/8/2025) Bài 3: Đơn vị xử lý trung tâm (tiếp)" data-toggle="tooltip"><div class="section_name"> Tuần 4 - (04/8/2025 - 10/8/2025) Bài 3: Đơn vị xử lý trung tâm (tiếp)</div></a></div><div class="progress-bar  progress-bar-success  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=5" title="Tuần 5 - (11/8/2025 - 17/8/2025) BÀI 4 Chương 2 Đơn vị xử lý trung tâm (tiếp) Chương 3 Bus và vấn đề truyền thông tin trong máy tính Chương 4 Tổ chức bộ nhớ" data-toggle="tooltip"><div class="section_name"> Tuần 5 - (11/8/2025 - 17/8/2025) BÀI 4 Chương 2 Đơn vị xử lý trung tâm (tiếp) Chương 3 Bus và vấn đề truyền thông tin trong máy tính Chương 4 Tổ chức bộ nhớ</div></a></div><div class="progress-bar  progress-bar-success  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=6" title="Tuần 6 - (18/8/2025 - 24/8/2025) Bài 5: Tổ chức bộ nhớ" data-toggle="tooltip"><div class="section_name"> Tuần 6 - (18/8/2025 - 24/8/2025) Bài 5: Tổ chức bộ nhớ</div></a></div><div class="progress-bar  progress-bar-danger  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=7" title="Tuần 7 - (25/8/2025 - 31/8/2025) Bài 6: Kiến trúc máy vi tính PC và đơn vị xử lý trung tâm" data-toggle="tooltip"><div class="section_name">(Đang học) Tuần 7 - (25/8/2025 - 31/8/2025) Bài 6: Kiến trúc máy vi tính PC và đơn vị xử lý trung tâm</div></a></div><div class="progress-bar  progress-bar-success  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=8" title="Tuần 8 - (01/9/2025 - 07/9/2025) Ôn tập" data-toggle="tooltip"><div class="section_name"> Tuần 8 - (01/9/2025 - 07/9/2025) Ôn tập</div></a></div><div class="progress-bar  progress-bar-success  " style="width: 10%;"><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=9" title="Tuần 9 - (08/9/2025 - 14/9/2025) Lớp học kết thúc" data-toggle="tooltip"><div class="section_name"> Tuần 9 - (08/9/2025 - 14/9/2025) Lớp học kết thúc</div></a></div>	</div>
+	<div class="navigation">
+		<ul class="breadcrumb"><li><a href="https://learning.ehou.edu.vn"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme_coursemos/1739846736/layout/home" alt="HOME" /></a></li><li><a href="https://learning.ehou.edu.vn/my/">Các lớp môn của tôi</a></li><li><a href="https://learning.ehou.edu.vn/course/index.php?categoryid=100">IRREGULAR</a></li><li><a href="https://learning.ehou.edu.vn/course/index.php?categoryid=126">LMS - EHOU</a></li><li><a title="Kiến trúc máy tính" href="https://learning.ehou.edu.vn/course/view.php?id=22327">IT02.059</a></li><li><a href="https://learning.ehou.edu.vn/course/view.php?id=22327&amp;section=2">Tuần 2 - (21/7/2025 - 27/7/2025)  Bài 1: Kiến trúc cơ bản của máy tính điện tử </a></li><li><a title="Bài trắc nghiệm" href="https://learning.ehou.edu.vn/mod/quiz/view.php?id=1205542">Bài luyện tập trắc nghiệm 01 - LTTN01</a></li></ul>	</div>
+</div>
+
+
+						<div role="main"><span id="maincontent"></span><table class="generaltable generalbox quizreviewsummary"><tbody><tr><th class="cell" scope="row">Bắt đầu vào lúc</th><td class="cell">Thứ ba, 26/08/2025, 5:12 PM</td></tr><tr><th class="cell" scope="row">Trạng thái</th><td class="cell">Hoàn thành</td></tr><tr><th class="cell" scope="row">Kết thúc lúc</th><td class="cell">Thứ ba, 26/08/2025, 5:28 PM</td></tr><tr><th class="cell" scope="row">Thời gian thực hiện</th><td class="cell">15 phút 10 giây</td></tr><tr><th class="cell" scope="row">Điểm</th><td class="cell">2,00/10,00</td></tr><tr><th class="cell" scope="row">Điểm</th><td class="cell"><b>20,00</b> trên 100,00</td></tr><tr><th class="cell" scope="row">Phản hồi</th><td class="cell"><p>Bài làm của anh chị chưa đạt yêu cầu.</p></td></tr></tbody></table><form action="https://learning.ehou.edu.vn/mod/quiz/review.php?attempt=14402132" method="post" class="questionflagsaveform"><div><div id="q1" class="que multichoice deferredfeedback notanswered"><div class="info"><h3 class="no">Câu hỏi <span class="qno">1</span></h3><div class="state">Chưa trả lời</div><div class="grade">Điểm ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:1_:flagged" value="0" /><input type="checkbox" id="q14667041:1_:flaggedcheckbox" name="q14667041:1_:flagged" value="1" /><input type="hidden" value="qaid=183310784&amp;qubaid=14667041&amp;qid=24671432&amp;slot=1&amp;checksum=899ea3416c84a60b12b435b91cf95997&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:1_:flaggedlabel" for="q14667041:1_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:1_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:1_:sequencecheck" value="2" /><div class="qtext"><p>Trong đơn vị xử lý trung tâm có thanh ghi địa chỉ bộ nhớ MAR (Memory Address Register). Trong một chu kỳ thực hiện lệnh, thanh ghi MAR được dùng để chứa (xác định):</p></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0"><input type="radio" name="q14667041:1_answer" disabled="disabled" value="0" id="q14667041:1_answer0" /><label for="q14667041:1_answer0">a. Địa chỉ ô nhớ chứa lệnh đang được thực hiện</label> </div>
+<div class="r1"><input type="radio" name="q14667041:1_answer" disabled="disabled" value="1" id="q14667041:1_answer1" /><label for="q14667041:1_answer1">b. Địa chỉ ô nhớ mà đơn vị xử lý trung tâm cần truy cập trong quá trình thực hiện lệnh</label> </div>
+<div class="r0"><input type="radio" name="q14667041:1_answer" disabled="disabled" value="2" id="q14667041:1_answer2" /><label for="q14667041:1_answer2">c. Địa chỉ ô nhớ chứa lệnh tiếp theo</label> </div>
+<div class="r1"><input type="radio" name="q14667041:1_answer" disabled="disabled" value="3" id="q14667041:1_answer3" /><label for="q14667041:1_answer3">d. Địa chỉ ô nhớ chứa toán hạng của lệnh đang được thực hiện</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q2" class="que multichoice deferredfeedback correct"><div class="info"><h3 class="no">Câu hỏi <span class="qno">2</span></h3><div class="state">Câu trả lời đúng</div><div class="grade">Điểm 1,00 ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:2_:flagged" value="0" /><input type="checkbox" id="q14667041:2_:flaggedcheckbox" name="q14667041:2_:flagged" value="1" /><input type="hidden" value="qaid=183310785&amp;qubaid=14667041&amp;qid=24671424&amp;slot=2&amp;checksum=b8e2ab58948d8a64b541bd3a5eae3072&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:2_:flaggedlabel" for="q14667041:2_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:2_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:2_:sequencecheck" value="3" /><div class="qtext"><p>Chức năng của thiết bị đầu vào ?</p><p /></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0 correct"><input type="radio" name="q14667041:2_answer" disabled="disabled" value="0" id="q14667041:2_answer0" checked="checked" /><label for="q14667041:2_answer0">a. Nhập và mã hoá thông tin đầu vào thành dạng thích hợp cho máy tính</label> <img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/grade_correct" alt="Câu trả lời đúng" class="questioncorrectnessicon" /></div>
+<div class="r1"><input type="radio" name="q14667041:2_answer" disabled="disabled" value="1" id="q14667041:2_answer1" /><label for="q14667041:2_answer1">b. Nhập dữ liệu vào cho máy tính</label> </div>
+<div class="r0"><input type="radio" name="q14667041:2_answer" disabled="disabled" value="2" id="q14667041:2_answer2" /><label for="q14667041:2_answer2">c. Nhập thông tin vào cho máy tính</label> </div>
+<div class="r1"><input type="radio" name="q14667041:2_answer" disabled="disabled" value="3" id="q14667041:2_answer3" /><label for="q14667041:2_answer3">d. Nhập thông tin dạng ký tự vào cho máy tính</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="specificfeedback"><p><strong>Đáp án đúng là:</strong> Nhập và mã hoá thông tin đầu vào thành dạng thích hợp cho máy tính<strong> Tham khảo:</strong> chương 1, mục 1.2.1, trang 4, 5, Bản Text.</p></div><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q3" class="que multichoice deferredfeedback correct"><div class="info"><h3 class="no">Câu hỏi <span class="qno">3</span></h3><div class="state">Câu trả lời đúng</div><div class="grade">Điểm 1,00 ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:3_:flagged" value="0" /><input type="checkbox" id="q14667041:3_:flaggedcheckbox" name="q14667041:3_:flagged" value="1" /><input type="hidden" value="qaid=183310786&amp;qubaid=14667041&amp;qid=24671438&amp;slot=3&amp;checksum=bbb7b5175303bf49bce18b0562e941b9&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:3_:flaggedlabel" for="q14667041:3_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:3_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:3_:sequencecheck" value="3" /><div class="qtext"><p>Xét một máy tính với tập lệnh máy khuôn dạng 8-bit, với phần địa chỉ chỉ có một địa chỉ 5 bit. Dạng gợi nhớ của lệnh máy như sau: Tên lệnh xxxxx, trong đó xxxxx là số nhị phân 5 bit. Lệnh  STORE xxxxx thực hiện cất nội dung thanh tích luỹ ACC ra ô nhớ địa chỉ xxxxx. Giả sử ACC chứa gía trị 11001, khi lệnh STORE 11010 được thực hiện thì ô nhớ đích 11010 sẽ chứa giá trị:</p></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0"><input type="radio" name="q14667041:3_answer" disabled="disabled" value="0" id="q14667041:3_answer0" /><label for="q14667041:3_answer0">a. 11010<br /><p /></label> </div>
+<div class="r1 correct"><input type="radio" name="q14667041:3_answer" disabled="disabled" value="1" id="q14667041:3_answer1" checked="checked" /><label for="q14667041:3_answer1">b. 11001</label> <img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/grade_correct" alt="Câu trả lời đúng" class="questioncorrectnessicon" /></div>
+<div class="r0"><input type="radio" name="q14667041:3_answer" disabled="disabled" value="2" id="q14667041:3_answer2" /><label for="q14667041:3_answer2">c. 10110</label> </div>
+<div class="r1"><input type="radio" name="q14667041:3_answer" disabled="disabled" value="3" id="q14667041:3_answer3" /><label for="q14667041:3_answer3">d. 11011</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="specificfeedback"><p><strong>Đáp án đúng là</strong><strong>:</strong> 11001</p><p><strong>Tham khảo:</strong> chương 1, mục 1.2.3.5, trang 10-13, Bản Text.</p></div><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q4" class="que multichoice deferredfeedback incorrect"><div class="info"><h3 class="no">Câu hỏi <span class="qno">4</span></h3><div class="state">Câu trả lời không đúng</div><div class="grade">Điểm 0,00 ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:4_:flagged" value="0" /><input type="checkbox" id="q14667041:4_:flaggedcheckbox" name="q14667041:4_:flagged" value="1" /><input type="hidden" value="qaid=183310787&amp;qubaid=14667041&amp;qid=24671437&amp;slot=4&amp;checksum=8593b0a6fb813031c58f181ea62f8cff&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:4_:flaggedlabel" for="q14667041:4_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:4_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:4_:sequencecheck" value="3" /><div class="qtext"><p>Xét một máy tính với tập lệnh máy khuôn dạng 8-bit, với phần địa chỉ chỉ có một địa chỉ 5 bit. Dạng gợi nhớ của lệnh máy như sau: Tên lệnh xxxxx, trong đó xxxxx là số nhị phân 5 bit. Lệnh trừ SUB xxxxx thực hiện lấy nội dung ACC trừ đi nội dung ô nhớ địa chỉ xxxxx, kết quả chứa vào ACC. Vậy trong giai đoạn (tiểu chu kỳ) thực hiện lệnh, các thao tác nào sau đây sẽ được Đơn vị xử lý trung tâm thực hiện:</p></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0 incorrect"><input type="radio" name="q14667041:4_answer" disabled="disabled" value="0" id="q14667041:4_answer0" checked="checked" /><label for="q14667041:4_answer0">a. Lấy nội dung ACC trừ đi nội dung ô nhớ địa chỉ xxxxx, kết quả chứa vào ACC</label> <img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/grade_incorrect" alt="Câu trả lời không đúng" class="questioncorrectnessicon" /></div>
+<div class="r1"><input type="radio" name="q14667041:4_answer" disabled="disabled" value="1" id="q14667041:4_answer1" /><label for="q14667041:4_answer1">b. Chuyển giá trị toán hạng từ ô nhớ địa chỉ xxxxx vào đơn vị xử lý trung tâm , lấy nội dung ACC trừ đi nội dung ô nhớ địa chỉ xxxxx, kết quả chứa vào ACC</label> </div>
+<div class="r0"><input type="radio" name="q14667041:4_answer" disabled="disabled" value="2" id="q14667041:4_answer2" /><label for="q14667041:4_answer2">c. Xác định địa chỉ ô nhớ xxxxx chứa toán hạng, chuyển giá trị toán hạng từ ô nhớ này vào đơn vị xử lý trung tâm, lấy nội dung ACC trừ đi nội dung ô nhớ địa chỉ xxxxx, kết quả chứa vào ACC.</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q5" class="que multichoice deferredfeedback notanswered"><div class="info"><h3 class="no">Câu hỏi <span class="qno">5</span></h3><div class="state">Chưa trả lời</div><div class="grade">Điểm ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:5_:flagged" value="0" /><input type="checkbox" id="q14667041:5_:flaggedcheckbox" name="q14667041:5_:flagged" value="1" /><input type="hidden" value="qaid=183310788&amp;qubaid=14667041&amp;qid=24671422&amp;slot=5&amp;checksum=53e6286a3b9521e7593662671d16d82a&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:5_:flaggedlabel" for="q14667041:5_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:5_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:5_:sequencecheck" value="2" /><div class="qtext"><p>Chức năng cơ bản của máy tính là gì ?</p><p /></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0"><input type="radio" name="q14667041:5_answer" disabled="disabled" value="0" id="q14667041:5_answer0" /><label for="q14667041:5_answer0">a. Soạn thảo văn bản</label> </div>
+<div class="r1"><input type="radio" name="q14667041:5_answer" disabled="disabled" value="1" id="q14667041:5_answer1" /><label for="q14667041:5_answer1">b. Thực hiện chương trình đang có trong bộ nhớ chính<br /><p /></label> </div>
+<div class="r0"><input type="radio" name="q14667041:5_answer" disabled="disabled" value="2" id="q14667041:5_answer2" /><label for="q14667041:5_answer2">c. Vào mạng Internet</label> </div>
+<div class="r1"><input type="radio" name="q14667041:5_answer" disabled="disabled" value="3" id="q14667041:5_answer3" /><label for="q14667041:5_answer3">d. Hỗ trợ con người sống và làm việc hiệu quả hơn</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q6" class="que multichoice deferredfeedback notanswered"><div class="info"><h3 class="no">Câu hỏi <span class="qno">6</span></h3><div class="state">Chưa trả lời</div><div class="grade">Điểm ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:6_:flagged" value="0" /><input type="checkbox" id="q14667041:6_:flaggedcheckbox" name="q14667041:6_:flagged" value="1" /><input type="hidden" value="qaid=183310789&amp;qubaid=14667041&amp;qid=24671441&amp;slot=6&amp;checksum=122d91c27ed517c026bf39742b908a52&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:6_:flaggedlabel" for="q14667041:6_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:6_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:6_:sequencecheck" value="2" /><div class="qtext"><p>Xét một máy tính với tập lệnh máy khuôn dạng 8-bit, với phần địa chỉ chỉ có một địa chỉ 5 bit. Dạng gợi nhớ của lệnh máy như sau: Tên lệnh xxxxx, trong đó xxxxx là số nhị phân 5 bit.  Khi  thực  hiện  lệnh  rẽ nhánh (nhẩy) không điều  kiện JMP xxxxx, con trỏ lệnh PC được nạp địa chỉ xxxxx. Giả sử ô nhớ chứa lệnh  JMP 11010  có địa chỉ là 10011. Vậy địa chỉ ô nhớ chứa lệnh cần thực hiện tiếp sau lệnh JMP 11010  sẽ là:</p><p /></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0"><input type="radio" name="q14667041:6_answer" disabled="disabled" value="0" id="q14667041:6_answer0" /><label for="q14667041:6_answer0">a. 10011</label> </div>
+<div class="r1"><input type="radio" name="q14667041:6_answer" disabled="disabled" value="1" id="q14667041:6_answer1" /><label for="q14667041:6_answer1">b. 10100</label> </div>
+<div class="r0"><input type="radio" name="q14667041:6_answer" disabled="disabled" value="2" id="q14667041:6_answer2" /><label for="q14667041:6_answer2">c. 11011</label> </div>
+<div class="r1"><input type="radio" name="q14667041:6_answer" disabled="disabled" value="3" id="q14667041:6_answer3" /><label for="q14667041:6_answer3">d. 11010</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q7" class="que multichoice deferredfeedback notanswered"><div class="info"><h3 class="no">Câu hỏi <span class="qno">7</span></h3><div class="state">Chưa trả lời</div><div class="grade">Điểm ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:7_:flagged" value="0" /><input type="checkbox" id="q14667041:7_:flaggedcheckbox" name="q14667041:7_:flagged" value="1" /><input type="hidden" value="qaid=183310790&amp;qubaid=14667041&amp;qid=24671434&amp;slot=7&amp;checksum=16e01e5e579f6031cd5b8d9a28ccc63d&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:7_:flaggedlabel" for="q14667041:7_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:7_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:7_:sequencecheck" value="2" /><div class="qtext"><p>Khi thực hiện một lệnh máy, đơn vị xử lý trung tâm:</p></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0"><input type="radio" name="q14667041:7_answer" disabled="disabled" value="0" id="q14667041:7_answer0" /><label for="q14667041:7_answer0">a. Tuỳ vào lệnh máy cụ thể mới phải thực hiện các thao tác xác định địa chỉ toán hạng và nhập toán hạng</label> </div>
+<div class="r1"><input type="radio" name="q14667041:7_answer" disabled="disabled" value="1" id="q14667041:7_answer1" /><label for="q14667041:7_answer1">b. Luôn phải thực hiện các thao tác xác định địa chỉ toán hạng và nhập toán hạng</label> </div>
+<div class="r0"><input type="radio" name="q14667041:7_answer" disabled="disabled" value="2" id="q14667041:7_answer2" /><label for="q14667041:7_answer2">c. Không phải thực hiện các thao tác xác định địa chỉ toán hạng và nhập toán hạng</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q8" class="que multichoice deferredfeedback incorrect"><div class="info"><h3 class="no">Câu hỏi <span class="qno">8</span></h3><div class="state">Câu trả lời không đúng</div><div class="grade">Điểm 0,00 ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:8_:flagged" value="0" /><input type="checkbox" id="q14667041:8_:flaggedcheckbox" name="q14667041:8_:flagged" value="1" /><input type="hidden" value="qaid=183310791&amp;qubaid=14667041&amp;qid=24671429&amp;slot=8&amp;checksum=e8548d33f9b0a6cb703f7ff53708d35d&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:8_:flaggedlabel" for="q14667041:8_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:8_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:8_:sequencecheck" value="3" /><div class="qtext"><p>Trong đơn vị xử lý trung tâm, đơn vị điều khiển CU sinh ra các tín hiệu điều khiển dựa trên cơ sở:</p><p /></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0 incorrect"><input type="radio" name="q14667041:8_answer" disabled="disabled" value="0" id="q14667041:8_answer0" checked="checked" /><label for="q14667041:8_answer0">a. Các thông tin từ người sử dụng máy tính</label> <img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/grade_incorrect" alt="Câu trả lời không đúng" class="questioncorrectnessicon" /></div>
+<div class="r1"><input type="radio" name="q14667041:8_answer" disabled="disabled" value="1" id="q14667041:8_answer1" /><label for="q14667041:8_answer1">b. Các thông tin chứa trong mã lệnh máy</label> </div>
+<div class="r0"><input type="radio" name="q14667041:8_answer" disabled="disabled" value="2" id="q14667041:8_answer2" /><label for="q14667041:8_answer2">c. Các thông tin chứa trong mã thao tác của mã lệnh máy</label> </div>
+<div class="r1"><input type="radio" name="q14667041:8_answer" disabled="disabled" value="3" id="q14667041:8_answer3" /><label for="q14667041:8_answer3">d. Các thông tin chứa trong chương trình đang chạy trong máy tính</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q9" class="que multichoice deferredfeedback notanswered"><div class="info"><h3 class="no">Câu hỏi <span class="qno">9</span></h3><div class="state">Chưa trả lời</div><div class="grade">Điểm ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:9_:flagged" value="0" /><input type="checkbox" id="q14667041:9_:flaggedcheckbox" name="q14667041:9_:flagged" value="1" /><input type="hidden" value="qaid=183310792&amp;qubaid=14667041&amp;qid=24671426&amp;slot=9&amp;checksum=754e7cb335403c14b414f6d9d4246caa&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:9_:flaggedlabel" for="q14667041:9_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:9_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:9_:sequencecheck" value="2" /><div class="qtext"><p>Trong máy tính, hệ đếm nào được sử dụng để biểu diễn thông tin ?</p><p /></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0"><input type="radio" name="q14667041:9_answer" disabled="disabled" value="0" id="q14667041:9_answer0" /><label for="q14667041:9_answer0">a. Cả ba hệ đếm: thập phân, nhị phân và thập lục phân</label> </div>
+<div class="r1"><input type="radio" name="q14667041:9_answer" disabled="disabled" value="1" id="q14667041:9_answer1" /><label for="q14667041:9_answer1">b. Hệ thập lục phân</label> </div>
+<div class="r0"><input type="radio" name="q14667041:9_answer" disabled="disabled" value="2" id="q14667041:9_answer2" /><label for="q14667041:9_answer2">c. Hệ thập phân<br /><p /></label> </div>
+<div class="r1"><input type="radio" name="q14667041:9_answer" disabled="disabled" value="3" id="q14667041:9_answer3" /><label for="q14667041:9_answer3">d. Hệ nhị phân</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><div id="q10" class="que multichoice deferredfeedback incorrect"><div class="info"><h3 class="no">Câu hỏi <span class="qno">10</span></h3><div class="state">Câu trả lời không đúng</div><div class="grade">Điểm 0,00 ngoài khoảng 1,00</div><div class="questionflag editable" aria-atomic="true" aria-relevant="text" aria-live="assertive"><input type="hidden" name="q14667041:10_:flagged" value="0" /><input type="checkbox" id="q14667041:10_:flaggedcheckbox" name="q14667041:10_:flagged" value="1" /><input type="hidden" value="qaid=183310793&amp;qubaid=14667041&amp;qid=24671423&amp;slot=10&amp;checksum=70a4d10d3df5ededb58331fb1e29c261&amp;sesskey=TtvliCrm9f&amp;newstate=" class="questionflagpostdata" /><label id="q14667041:10_:flaggedlabel" for="q14667041:10_:flaggedcheckbox"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/unflagged" alt="Không gắn cờ" id="q14667041:10_:flaggedimg" /></label>
+</div></div><div class="content"><div class="formulation"><h4 class="accesshide">Mô tả câu hỏi</h4><input type="hidden" name="q14667041:10_:sequencecheck" value="3" /><div class="qtext"><p>Chức năng của bộ nhớ chính là gì ?</p><p /></div><div class="ablock"><div class="prompt">Chọn một câu trả lời:</div><div class="answer"><div class="r0 incorrect"><input type="radio" name="q14667041:10_answer" disabled="disabled" value="0" id="q14667041:10_answer0" checked="checked" /><label for="q14667041:10_answer0">a. Chứa tập tin chương trình và dữ liệu có liên quan<br /><p /></label> <img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/i/grade_incorrect" alt="Câu trả lời không đúng" class="questioncorrectnessicon" /></div>
+<div class="r1"><input type="radio" name="q14667041:10_answer" disabled="disabled" value="1" id="q14667041:10_answer1" /><label for="q14667041:10_answer1">b. Chứa thông tin<br /><p /></label> </div>
+<div class="r0"><input type="radio" name="q14667041:10_answer" disabled="disabled" value="2" id="q14667041:10_answer2" /><label for="q14667041:10_answer2">c. Chứa chương trình đang thực hiện và dữ liệu có liên quan</label> </div>
+<div class="r1"><input type="radio" name="q14667041:10_answer" disabled="disabled" value="3" id="q14667041:10_answer3" /><label for="q14667041:10_answer3">d. Chứa dữ liệu</label> </div>
+</div></div></div><div class="outcome"><h4 class="accesshide">Phản hồi</h4><div class="feedback"><div class="rightanswer">Câu trả lời đúng là:</div></div></div></div></div><input type="hidden" name="sesskey" value="TtvliCrm9f" /><div class="submitbtns"><input type="submit" class="questionflagsavebutton" name="savingflags" value="Lưu trạng thái các cờ" /></div></div></form><div class="submitbtns"><a href="https://learning.ehou.edu.vn/mod/quiz/view.php?id=1205542">Xem lại khi hoàn thành</a></div></div>					</div>
+					<div id="page-footer">
+						
+
+<div class="footer_menu">
+	<ul class="menus">
+		<!--
+		<li>
+			<div class="title"></div>
+			<ul>
+				<li><a href="#" target="_blank"></a></li>
+				<li><a href="#" target="_blank"></a></li>
+			</ul>
+		</li>
+		-->
+		<li class="footerdiv footerboder">
+			<div class="title">ĐỊA CHỈ</div>
+			<ul>
+				<li>VIỆN ĐT & PT HỌC TẬP SUỐT ĐỜI - TRƯỜNG ĐẠI HỌC MỞ HÀ NỘI</li>
+				<li>Phòng A3.3 – Nhà B101 – Phố Nguyễn Hiền – Phường Bạch Mai – Thành phố Hà Nội</li>
+			</ul> 
+		</li> 
+		<li class="footerdiv footerboder">
+			<div class="title">THÔNG TIN LIÊN HỆ</div>
+			<ul>
+				<li><a>- Điện thoại: 0243.623.1058 / 0243.623.0853</a></li> 
+                <li><a href="https://elc.ehou.edu.vn/" target="_blank">- Website: elc.ehou.edu.vn</a></li> 
+                <li><a>- Email: elc@ehou.edu.vn</a></li> 
+			</ul> 
+		</li> 
+		<li class="footerdiv footerboder">
+			<div class="title">CÁC LIÊN KẾT</div>
+			<ul> 
+                            <li><a href="https://hou.edu.vn/" target="_blank">- Trường Đại học Mở Hà Nội</a></li> 
+                            <li><a href="http://www.moet.gov.vn/" target="_blank">- Bộ Giáo dục và Đào tạo</a></li> 
+                            <li><a href="http://elc.ehou.edu.vn/" target="_blank">- Trung tâm Đào tạo Trực tuyến</a></li>
+                            <li><a href="http://thuvien.hou.edu.vn/" target="_blank">- Thư viện</a></li> 
+                            <li><a href="http://englishclub.ehou.edu.vn/" target="_blank">- Diễn đàn tiếng anh online</a></li> 
+            </ul> 
+		</li> 
+		<li class="footerdiv">
+			<div class="title">
+					<a title="LMS" target="_blank" href="https://hou.edu.vn/" style="margin-top: 15px;" >
+						<img height="100" src="https://learning.ehou.edu.vn/theme/coursemos/pix/dhmo2.png" alt="hou.edu.vn">
+					</a>
+					  <a title="LMS" target="_blank" href="http://www.koica.go.kr/english/main.html" style="margin-top: 15px;" >
+						<img height="100" src="https://learning.ehou.edu.vn/theme/coursemos/pix/koicalogo.png" alt="hou.edu.vn">
+					</a>
+			</div>
+		</li>
+		<!-- <li>
+			<div class="title">Thông tin chung</div>
+			<ul>
+				<li><a href="https://learning.ehou.edu.vn/mod/ubboard/view.php?id=75388">Thông báo</a></li>
+				<li><a href="https://learning.ehou.edu.vn/mod/ubboard/view.php?id=37800">Hỏi đáp</a></li>
+				<li><a href="https://learning.ehou.edu.vn/mod/ubboard/view.php?id=37801">Các câu thường hỏi</a></li>
+				<li><a href="http://support.ehou.edu.vn/question" target="_blank">Số người online</a></li>
+			</ul>
+		</li>
+		<li>
+			<div class="title">Tập hợp trang web</div>
+			<ul> -->
+				<!--
+				<li><a href="http://www.shinhan.ac.kr/" target="_blank"></a></li>
+				<li><a href="http://stins.shinhan.ac.kr/irj/portal" target="_blank"></a></li>
+				<li><a href="https://counsel.shinhan.ac.kr/counsel/" target="_blank"></a></li>
+				<li><a href="http://lifelearning.shinhan.ac.kr/" target="_blank"></a></li>-->
+		<!--		<li><a href="http://elc.ehou.edu.vn/" target="_blank">Cổng đào tạo trực tuyến</a></li>
+				<li><a href="http://thuvien.hou.edu.vn/" target="_blank">Trung tâm Thư viện</a></li>
+				<li><a href="http://khoatuxa.hou.edu.vn" target="_blank">Khoa Đào tạo từ xa</a></li>
+				
+			</ul>
+		</li> -->
+	</ul>
+</div>
+<div class="copyright">
+	<!-- Copyright© 2025 --> Copyright© 2017 of Hanoi Open University under donated by Korea International Cooperation Agency. All Rights Reserved.
+    <span style="color:#2b2f33;">192.168.1.111</span>
+</div>
+<script type="text/javascript">
+		var width = $(window).width(); 
+		var height = $(window).height(); 
+		if ((width <= 1024  )) {
+			if($("#page-coursemos").hasClass('left-expand')) {
+					opened = 0;
+					$("#page-coursemos").removeClass('left-expand');
+			} 
+			theme_coursemos.menu_click('left', opened);
+			if($("#page-coursemos").hasClass('right-expand')) {
+					opened = 0;
+					$("#page-coursemos").removeClass('right-expand');
+			} 
+			theme_coursemos.menu_click('right', opened);
+			theme_coursemos.copykiller_width();  //2015-11-17 copykiller add
+		}
+</script>
+<!--
+<script type="text/javascript">
+$(document).ready(function() {      
+			if($("#page-coursemos").hasClass('left-expand')) {
+					opened = 0;
+					$("#page-coursemos").removeClass('left-expand');
+			} 
+			theme_coursemos.menu_click('left', opened);
+			// 오른쪽 상단 메뉴 버튼 클릭
+			if($("#page-coursemos").hasClass('right-expand')) {
+					opened = 0;
+					$("#page-coursemos").removeClass('right-expand');
+			} 
+			theme_coursemos.menu_click('right', opened);
+			theme_coursemos.copykiller_width();  //2015-11-17 copykiller add
+}); 
+</script>
+-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="page-coursemos-left" class="side-panel">
+						<div class="region-content mCustomScrollbar submenu_open">
+				<div class="side-panel-title my_course">
+	  				<!-- h4 --> <!-- Element div not allowed as child of element h4 in this context -->
+					<div class="my_course_hou">
+	  					Liên kết nội bộ	  					<div class="course_view_button_hou">
+	  						<button type="button" class="houbtn "></button>
+	  					</div>
+	  				</div>
+					<div class="my_course_list_hou ">
+	  					<ul>
+	  						<li><a href="http://account.ehou.edu.vn/" title="Trang cá nhân">Trang cá nhân</a></li>
+							<li><a href="http://support.ehou.edu.vn/" title="Trang H113">Trang H113</a></li>
+							<li><a href="http://forum.ehou.edu.vn/" title="Diễn đàn Ehou">Diễn đàn Ehou</a></li>
+							<li><a href="https://vdtsd.hou.edu.vn/" title="Cổng thông tin">Cổng thông tin</a></li>
+	  					</ul>
+	  				</div>
+	  				<div class="my_course_title">
+	  					Lớp môn của tôi	  					<div class="course_view_button">
+	  						<button type="button" class="nobtn "></button>
+	  					</div>
+	  				<!-- /h4 -->
+	  				</div>
+					
+	  				<div class="my_course_list ">
+	  					<ul>
+	  						<li><a href="https://learning.ehou.edu.vn/course/view.php?id=22323" title="Phát triển kỹ năng cá nhân 2 - EG41.187">Phát triển kỹ năng cá nhân 2 - EG41.187</a></li><li><a href="https://learning.ehou.edu.vn/course/view.php?id=22327" title="Kiến trúc máy tính - IT02.059">Kiến trúc máy tính - IT02.059</a></li><li><a href="https://learning.ehou.edu.vn/course/view.php?id=22038" title="Phát triển kỹ năng cá nhân 1 - EG35.286">Phát triển kỹ năng cá nhân 1 - EG35.286</a></li><li><a href="https://learning.ehou.edu.vn/course/view.php?id=22053" title="Kỹ thuật lập trình cơ sở - IT01.100">Kỹ thuật lập trình cơ sở - IT01.100</a></li><li><a href="https://learning.ehou.edu.vn/course/view.php?id=20934" title="Nhập môn internet và Elearning - EG38.279">Nhập môn internet và Elearning - EG38.279</a></li>	  					</ul>
+								  				</div>
+	  			</div>
+				
+
+
+				<!-- Modal -->
+<div class="modal" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">modal title</h4>
+      </div>
+      <div class="modal-body">
+      <p>This is content area.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div> <!-- modal contents -->
+  </div> <!-- modal dialog -->
+</div> <!-- modal full window -->
+
+
+
+	  			<div class="side-panel-content">
+	  				<div class="menus ">
+	<div class="main_menu">
+		<ul>
+							<li><a href="https://learning.ehou.edu.vn/mod/ubboard/view.php?id=75388" class="mm_menu mm-help-info">Thông báo</a></li>
+			
+			<!--<li>
+				<a href="https://learning.ehou.edu.vn/mod/ubboard/view.php?id=75388" class="mm_menu mm-info">Thông tin chung</a>
+								<ul class="mm_menu_sub ">
+					<li><a href="https://learning.ehou.edu.vn/mod/ubboard/view.php?id=75388" class="" target="_blank">Thông báo</a></li>
+					<li><a href="https://learning.ehou.edu.vn/mod/ubboard/view.php?id=37800" class="" target="_blank">Hỏi đáp</a></li>
+					<li><a href="https://learning.ehou.edu.vn/mod/ubboard/view.php?id=37801" class="" target="_blank">Các câu thường hỏi</a></li>
+				</ul> -->
+			</li>
+			<li>
+				<a class="mm_menu mm-help">Hướng dẫn học tập</a>
+				<ul class="mm_menu_sub_help ">
+					<li><a href="https://learning.ehou.edu.vn/theme/coursemos/pix/huongdansudungcongnghe.pdf" title="Tài liệu hướng dẫn sử dụng công nghệ E-Learning"><span class="arrow ">►</span>Tài liệu hướng dẫn sử dụng công nghệ E-Learning</a></li>
+					<li><a target="_blank" href="https://www.youtube.com/watch?v=R-8_kL1drrI" title="Video hướng dẫn sử dụng công nghệ E-Learning"><span class="arrow ">►</span>Video hướng dẫn sử dụng công nghệ E-Learning</a></li>
+					<li><a href="https://learning.ehou.edu.vn/theme/coursemos/pix/huongdanhoctaptrenhtelearning.pdf" title="Hướng dẫn Học tập trên hệ thống đào tạo E-Learning"><span class="arrow ">►</span>Hướng dẫn Học tập trên hệ thống đào tạo E-Learning</a></li>
+					<!-- <li><a href="https://learning.ehou.edu.vn/theme/coursemos/pix/Tai%20lieu%20huong%20dan_danh%20cho%20hoc%20vien_Khoa%20Tieng%20Anh.pdf" title="Khoa tiếng anh" target="_blank">Khoa tiếng anh</a></li>
+					<li><a href="https://learning.ehou.edu.vn/theme/coursemos/pix/Tai%20lieu%20huong%20dan_Danh%20cho%20hoc%20vien_Lao%20Cai.pdf" title="Lào cai" target="_blank">Lào cai</a></li>-->
+				</ul>
+			</li>
+			<li>
+				<a class="mm_menu mm-grade-info">Kết quả học tập</a>
+					                                 <ul class="mm_menu_sub_grade ">
+                                    										<li><a href="https://learning.ehou.edu.vn/grade/report/overview/index.php?id=22327&userid=54913" style="font-weight: bold;font-style: italic;color: #d34215" title="Bảng điểm các môn học"><span class="arrow ">►</span>Bảng điểm các môn học</a></li>
+										<li><a href="https://learning.ehou.edu.vn/my/" style="font-weight: bold;font-style: italic;color: #d34215" title="Các hoạt động trong lớp môn của tôi"><span class="arrow ">►</span>Các hoạt động trong lớp môn của tôi</a></li>
+										                                        <li><a target="_blank" href="https://learning.ehou.edu.vn/grade/report/user/index.php?id=22327" title="Kiến trúc máy tính"><span class="arrow ">►</span>Kiến trúc máy tính</a></li>
+                                                                            <li><a target="_blank" href="https://learning.ehou.edu.vn/grade/report/user/index.php?id=22323" title="Phát triển kỹ năng cá nhân 2"><span class="arrow ">►</span>Phát triển kỹ năng cá nhân 2</a></li>
+                                                                            <li><a target="_blank" href="https://learning.ehou.edu.vn/grade/report/user/index.php?id=22053" title="Kỹ thuật lập trình cơ sở"><span class="arrow ">►</span>Kỹ thuật lập trình cơ sở</a></li>
+                                                                            <li><a target="_blank" href="https://learning.ehou.edu.vn/grade/report/user/index.php?id=22038" title="Phát triển kỹ năng cá nhân 1"><span class="arrow ">►</span>Phát triển kỹ năng cá nhân 1</a></li>
+                                                                            <li><a target="_blank" href="https://learning.ehou.edu.vn/grade/report/user/index.php?id=20934" title="Nhập môn internet và Elearning"><span class="arrow ">►</span>Nhập môn internet và Elearning</a></li>
+                                                                    </ul>
+                            			</li>
+			<li>
+				<a class="mm_menu mm-students-info">Sinh viên cần biết</a>
+				<ul class="mm_menu_sub_students ">
+					<li>
+						<a target="_blank" href="http://elc.ehou.edu.vn/thong-tin-chung-vdhmhn" title="Về Trường Đại học Mở Hà Nội"><span class="arrow ">►</span>Về Trường Đại học Mở Hà Nội</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://elc.ehou.edu.vn/noi-qui-hoc-tap" title="Quy định sử dụng hệ thống E-Learning"><span class="arrow ">►</span>Quy định sử dụng hệ thống E-Learning</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://elc.ehou.edu.vn/hoc-e-nhu-the-nao" title="Phương pháp học tập"><span class="arrow ">►</span>Phương pháp học tập</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://elc.ehou.edu.vn/quan-ly-va-ho-tro-sinh-vien" title="Quản lí và Hỗ trợ sinh viên"><span class="arrow ">►</span>Quản lí và Hỗ trợ sinh viên</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://elc.ehou.edu.vn/qui-dinh-noi-qui" title="Qui định - Nội qui"><span class="arrow ">►</span>Qui định - Nội qui</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://elc.ehou.edu.vn/cacmaudon" title="Các mẫu đơn"><span class="arrow ">►</span>Các mẫu đơn</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://elc.ehou.edu.vn/cau-hoi-thuong-gap" title="Các câu hỏi thường gặp"><span class="arrow ">►</span>Các câu hỏi thường gặp</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://elc.ehou.edu.vn/hoc-phi" title="Học phí"><span class="arrow ">►</span>Học phí</a>
+					</li>
+					<li><a href="https://learning.ehou.edu.vn/theme/coursemos/pix/huongdanchuyenkhoanhocphi_EHOU_VCB.pdf" title="Hướng dẫn chuyển khoản học phí EHOU VCB"><span class="arrow ">►</span>Chuyển khoản học phí</a></li>
+					<li><a href="https://learning.ehou.edu.vn/theme/coursemos/pix/noiquydiendan.pdf" title="Nội quy tham gia diễn đàn lớp môn" target="_blank"><span class="arrow ">►</span>Nội quy tham gia diễn đàn lớp môn</a></li>
+					<li><a target="_blank" href="http://ehou.edu.vn/lien-he" title="Liên hệ"><span class="arrow ">►</span>Liên hệ</a></li>
+				</ul>
+			</li>
+			
+			<!--<li><a href="https://learning.ehou.edu.vn/local/ubassistant/index.php" class="mm_menu mm-assistant">Tất cả lớp môn</a></li>
+			<li><a href="https://learning.ehou.edu.vn/local/ubassistant/index.php" class="mm_menu mm-help" title="[[help_learning1]]">[[help_learning1]]</a></li>
+			<li><a href="https://www.youtube.com/watch?v=cH8G3MTZKHs&feature=youtu.be" class="mm_menu mm-help" title="Video hướng dẫn sử dụng công nghệ Elearning">Video hướng dẫn sử dụng công nghệ Elearning</a></li> -->
+			
+			<!--<li><a href="https://learning.ehou.edu.vn/local/ubassistant/open.php" class="mm_menu mm-open">Lớp môn đang mở</a></li>
+			<li><a href="https://learning.ehou.edu.vn/local/ubassistant/irregular.php" class="mm_menu mm-irregular">Lớp môn ngắn hạn</a></li>
+			-->
+		</ul>
+	</div>
+  			
+  	  	<div class="sub_menu course_sub_menu">
+  		<ul>
+  			<li>
+  				<a href="https://learning.ehou.edu.vn/user/users.php?id=22327" class="sm_menu nobtn menu_open_close menu_users " title="Danh sách thành viên">Danh sách thành viên</a>
+  			</li>
+  			  			
+  			<!-- course setting -->
+  			        <!-- grade/attendance -->
+  			<li class="">
+  				<button class="sm_menu menu_open_close" data-menuname="menu_grade" title="Điểm số/đánh giá">Điểm số/đánh giá</button>
+  				<ul>
+  					<li><a href="https://learning.ehou.edu.vn/grade/report/index.php?id=22327" class="" title="Điểm">Điểm</a></li>  				</ul>
+  			</li>
+        <!-- group -->
+  			<li class="">
+  				<button class="sm_menu menu_open_close" data-menuname="menu_group" title="Nhóm">Nhóm</button>
+  				<ul>
+  					  					<!-- [팀구성원]은 모두 노출되는 메뉴임 -->
+  					<li><a href="https://learning.ehou.edu.vn/blocks/ubshortcut/group.php?id=22327" class="" title="Nhóm thành viên">Nhóm thành viên</a></li>
+  				</ul>
+  			</li>
+
+        <!-- student notification -->
+  			  			
+  			  		</ul>
+  	</div>
+  	
+<div class="menu_control"><button type="button" class="nobtn main_menu_close">&lt;</button></div>  </div>	  			</div>
+	  		</div>
+		</div>
+		
+		<div id="page-coursemos-right" class="side-panel">
+			<div class="region-content">
+					  			
+		  		<div role="tabpanel" class="container-fluid">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs row user-menus" role="tablist">
+						<li role="presentation" class="user-menu-li ">
+							<a href="#side-message" aria-controls="side-message" role="tab" data-toggle="tab">
+								<span class="menuicon menuicon-message"></span>
+								
+															</a>
+						</li>
+						<li role="presentation" class="user-menu-li ">
+							<a href="#side-notification" aria-controls="side-notification" role="tab" data-toggle="tab">
+								<span class="menuicon menuicon-notification"></span>
+								
+															</a>
+						</li>
+						<li role="presentation" class="user-menu-li ">
+							<a href="#side-userinfo" aria-controls="side-userinfo" role="tab" data-toggle="tab">
+								<span class="menuicon menuicon-user"></span>
+							</a>
+						</li>
+						<li role="presentation" class="user-menu-li ">
+							<a href="#side-upcoming" aria-controls="side-upcoming" role="tab" data-toggle="tab">
+								<span class="menuicon menuicon-upcoming"></span>
+							</a>
+						</li>
+						<li role="presentation" class="user-menu-li active">
+							<a href="#side-blocks" aria-controls="side-blocks" role="tab" data-toggle="tab">
+								<span class="menuicon menuicon-blocks"></span>
+							</a>
+						</li>
+					</ul>
+					
+					<div class="side-panel-content mCustomScrollbar">
+						<div class="tab-content ">
+							<div role="tabpanel" class="tab-pane " id="side-message">
+								<div class="tab-loading"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme_coursemos/1739846736/loading" alt="loading" /><p>Loading...</p></div>							</div>
+							<div role="tabpanel" class="tab-pane " id="side-notification">
+								<div class="tab-loading"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme_coursemos/1739846736/loading" alt="loading" /><p>Loading...</p></div>							</div>
+							<div role="tabpanel" class="tab-pane " id="side-userinfo">
+								<div class="userinfo">
+																		<!-- <div class="userpicture">
+									<a href="https://learning.ehou.edu.vn/user/view.php?id=54913&amp;course=22327"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/core/1739846736/u/f1" alt="Hình của Vũ Xuân Quý" title="Hình của Vũ Xuân Quý" class="userpicture defaultuserpic" width="100" height="100" /></a>									</div> -->
+									
+									<div class="userpicture">
+										<a href="https://learning.ehou.edu.vn/user/view.php?id=54913">
+											<img src="http://account.ehou.edu.vn/avatar/w210-h210/quyvx.jpg" alt="Hình của quyvx" title="Hình của quyvx" class="userpicture mCS_img_loaded" width="100" height="100">
+										</a>									
+									</div>
+									
+									<div class="userdesc">
+										<dl class="dl-horizontal">
+											<dt>Tên đầy đủ</dt>
+											<dd>Vũ Xuân Quý</dd>
+											<dt>ID hệ thống</dt>
+											<dd>AAIS_USER_62933</dd>
+											<dt>Cơ quan</dt>
+											<dd></dd>
+										</dl>
+									</div>
+																		<div class="buttonset">
+										<a href="https://learning.ehou.edu.vn/user/files.php" class="btn btn-default btn-sm">Tài liệu của tôi</a>
+										<!-- <a href="https://learning.ehou.edu.vn/user/edit.php?id=54913" class="btn btn-primary btn-sm">Cập nhật hồ sơ</a> -->
+										<a href="http://account.ehou.edu.vn" class="btn btn-primary btn-sm">Trang cá nhân</a>
+																			</div>
+									
+																	</div>
+							</div>
+							<div role="tabpanel" class="tab-pane " id="side-upcoming">
+								<div class="tab-loading"><img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme_coursemos/1739846736/loading" alt="loading" /><p>Loading...</p></div>							</div>
+							<div role="tabpanel" class="tab-pane active" id="side-blocks">
+								<!-- div id="side-blocks" class="blocks" -->
+								<div class="blocks">
+				  					<div id="region-side-post" class="block-region">
+										<div class="region-content">
+											<a href="#sb-1" class="skip-block">Bỏ qua Menu bài tập</a><div class="block block_fake" id="mod_quiz_navblock" data-block="_fake"><div class="header"><div class="title"><div class="block_action"></div><h2>Menu bài tập</h2></div></div><div class="content"><div class="qn_buttons allquestionsononepage"><a class="qnbutton notanswered free thispage" id="quiznavbutton1" title="Chưa trả lời" data-quiz-page="0" href="#"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>1<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton correct free thispage" id="quiznavbutton2" title="Câu trả lời đúng" data-quiz-page="0" href="#q2"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>2<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton correct free thispage" id="quiznavbutton3" title="Câu trả lời đúng" data-quiz-page="0" href="#q3"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>3<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton incorrect free thispage" id="quiznavbutton4" title="Câu trả lời không đúng" data-quiz-page="0" href="#q4"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>4<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton notanswered free thispage" id="quiznavbutton5" title="Chưa trả lời" data-quiz-page="0" href="#q5"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>5<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton notanswered free thispage" id="quiznavbutton6" title="Chưa trả lời" data-quiz-page="0" href="#q6"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>6<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton notanswered free thispage" id="quiznavbutton7" title="Chưa trả lời" data-quiz-page="0" href="#q7"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>7<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton incorrect free thispage" id="quiznavbutton8" title="Câu trả lời không đúng" data-quiz-page="0" href="#q8"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>8<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton notanswered free thispage" id="quiznavbutton9" title="Chưa trả lời" data-quiz-page="0" href="#q9"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>9<span class="accesshide"> Trang này <span class="flagstate"></span></span></a><a class="qnbutton incorrect free thispage" id="quiznavbutton10" title="Câu trả lời không đúng" data-quiz-page="0" href="#q10"><span class="thispageholder"></span><span class="trafficlight"></span><span class="accesshide">Question </span>10<span class="accesshide"> Trang này <span class="flagstate"></span></span></a></div><div class="othernav"><a href="https://learning.ehou.edu.vn/mod/quiz/view.php?id=1205542">Xem lại khi hoàn thành</a></div></div></div><span id="sb-1" class="skip-block-to"></span>										</div>
+									</div>
+				  				</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+		
+	</div>
+	
+	
+	<div id="ajax_loading_submit">&nbsp;</div>
+<div id="ajax_loading_container">
+	<div id="ajax_loading_submit_img">
+		<img src="https://learning.ehou.edu.vn/theme/image.php/coursemos/theme_coursemos/1739846736/ajax-loader" alt="loading..." /> Loading...
+	</div>
+	<div id="ajax_loading_message">
+		<p class="save_msg">Dữ liệu đang lưu. Xin vui lòng chờ đợi</p>
+		<p class="refresh_msg">Xin chờ ít phút! nếu chờ quá lâu có thể bấm F5 để tải lại trang.</p>
+	</div>
+</div>
+<div id="back-top">
+	<a href="#top"><span></span></a>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+M.yui.add_module({"core_question_engine":{"name":"core_question_engine","fullpath":"https:\/\/learning.ehou.edu.vn\/lib\/javascript.php\/1739846736\/question\/qengine.js","requires":["node","event"]},"mod_quiz":{"name":"mod_quiz","fullpath":"https:\/\/learning.ehou.edu.vn\/lib\/javascript.php\/1739846736\/mod\/quiz\/module.js","requires":["base","dom","event-delegate","event-key","core_question_engine","moodle-core-formchangechecker"]}});
+
+//]]>
+</script>
+<script type="text/javascript" src="https://learning.ehou.edu.vn/theme/javascript.php/coursemos/1739846736/footer"></script>
+<script type="text/javascript">
+//<![CDATA[
+M.str = {"moodle":{"lastmodified":"S\u1eeda l\u1ea7n cu\u1ed1i","name":"T\u00ean","error":"L\u1ed7i","info":"Th\u00f4ng tin","cancel":"Hu\u1ef7 b\u1ecf","changesmadereallygoaway":"B\u1ea1n v\u1eeba c\u00f3 m\u1ed9t s\u1ed1 thay \u0111\u1ed5i. C\u00f3 ch\u1eafc l\u00e0 b\u1ea1n mu\u1ed1n \u0111i ch\u1ed7 kh\u00e1c v\u00e0 b\u1ecf h\u1ebft nh\u1eefng thay \u0111\u1ed5i v\u1eeba r\u1ed3i?","morehelp":"Tr\u1ee3 gi\u00fap th\u00eam","loadinghelp":"\u0110ang t\u1ea3i...","yes":"C\u00f3","confirm":"X\u00e1c nh\u1eadn","no":"Kh\u00f4ng","areyousure":"B\u1ea1n c\u00f3 ch\u1eafc kh\u00f4ng?","closebuttontitle":"\u0110\u00f3ng","unknownerror":"L\u1ed7i kh\u00f4ng r\u00f5"},"repository":{"type":"Lo\u1ea1i","size":"K\u00edch th\u01b0\u1edbc","invalidjson":"Chu\u1ed7i JSON kh\u00f4ng h\u1ee3p l\u1ec7","nofilesattached":"Kh\u00f4ng c\u00f3 t\u1ec7p \u0111\u00ednh k\u00e8m","filepicker":"Ch\u1ecdn t\u1eadp tin","logout":"Tho\u00e1t","nofilesavailable":"Kh\u00f4ng c\u00f3 t\u1eadp tin n\u00e0o","norepositoriesavailable":"Xin l\u1ed7i, kh\u00f4ng c\u00f3 kho n\u00e0o hi\u1ec7n t\u1ea1i c\u1ee7a b\u1ea1n c\u00f3 th\u1ec3 tr\u1ea3 v\u1ec1 c\u00e1c t\u1ec7p theo \u0111\u1ecbnh d\u1ea1ng y\u00eau c\u1ea7u.","fileexistsdialogheader":"T\u1ec7p t\u1ed3n t\u1ea1i","fileexistsdialog_editor":"M\u1ed9t t\u1ec7p c\u00f3 t\u00ean \u0111\u00f3 \u0111\u00e3 \u0111\u01b0\u1ee3c \u0111\u00ednh k\u00e8m trong v\u0103n b\u1ea3n b\u1ea1n \u0111ang s\u1eeda.","fileexistsdialog_filemanager":"M\u1ed9t t\u1ec7p c\u00f3 t\u00ean \u0111\u00e3 \u0111\u01b0\u1ee3c \u0111\u00ednh k\u00e8m","renameto":"\u0110\u1eb7t t\u00ean th\u00e0nh \"{$a}\"","referencesexist":"C\u00f3 {$a} t\u1ec7p b\u00ed danh\/l\u1ed1i t\u1eaft s\u1eed d\u1ee5ng t\u1ec7p n\u00e0y l\u00e0m ngu\u1ed3n","select":"Ch\u1ecdn"},"question":{"flagged":"\u0110\u00e3 \u0111\u01b0\u1ee3c g\u1eafn c\u1edd"},"quiz":{"functiondisabledbysecuremode":"T\u00ednh n\u0103ng n\u00e0y \u0111ang t\u1ea1m th\u1eddi b\u1ecb v\u00f4 hi\u1ec7u h\u00f3a","startattempt":"B\u1eaft \u0111\u1ea7u l\u00e0m b\u00e0i","timesup":"H\u1ebft th\u1eddi gian!"},"admin":{"confirmation":"X\u00e1c nh\u1eadn"}};
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+YUI().use('node', function(Y) {
+M.util.load_flowplayer();
+setTimeout("fix_column_widths()", 20);
+ M.util.js_pending('random68ad973cd30e71'); Y.use('core_question_flags', function(Y) { M.core_question_flags.init(Y, "https:\/\/learning.ehou.edu.vn\/question\/toggleflag.php", [{"src":"https:\/\/learning.ehou.edu.vn\/theme\/image.php\/coursemos\/core\/1739846736\/i\/unflagged","title":"\u0110\u00e1nh c\u1edd c\u00e2u h\u1ecfi n\u00e0y \u0111\u1ec3 tham kh\u1ea3o sau","alt":"Kh\u00f4ng g\u1eafn c\u1edd"},{"src":"https:\/\/learning.ehou.edu.vn\/theme\/image.php\/coursemos\/core\/1739846736\/i\/flagged","title":"X\u00f3a c\u1edd","alt":"\u0110\u00e3 \u0111\u01b0\u1ee3c g\u1eafn c\u1edd"}], ["\u0110\u00e1nh d\u1ea5u \u0111\u1ec3 l\u00e0m sau","B\u1ecf \u0111\u00e1nh d\u1ea5u"]);  M.util.js_complete('random68ad973cd30e71'); });
+Y.use("moodle-filter_mathjaxloader-loader",function() {M.filter_mathjaxloader.configure({"mathjaxconfig":"MathJax.Hub.Config({\r\n    config: [\"Accessible.js\", \"Safe.js\"],\r\n    errorSettings: { message: [\"!\"] },\r\n    skipStartupTypeset: true,\r\n    messageStyle: \"none\"\r\n});\r\n","lang":"en"});
+});
+ M.util.js_pending('random68ad973cd30e72'); Y.use('mod_quiz', function(Y) { M.mod_quiz.nav.init(Y);  M.util.js_complete('random68ad973cd30e72'); });
+M.util.help_popups.setup(Y);
+Y.use("moodle-core-popuphelp",function() {M.core.init_popuphelp();
+});
+ M.util.js_pending('random68ad973cd30e74'); Y.use('mod_quiz', function(Y) { M.mod_quiz.init_review_form(Y);  M.util.js_complete('random68ad973cd30e74'); });
+ M.util.js_pending('random68ad973cd30e75'); Y.on('domready', function() { M.util.js_complete("init");  M.util.js_complete('random68ad973cd30e75'); });
+
+});
+//]]>
+</script>
+	
+</div>
+</body>
+</html>
