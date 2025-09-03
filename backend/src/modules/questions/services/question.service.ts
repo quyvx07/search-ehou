@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Question } from '../entities/question.entity';
@@ -26,12 +26,21 @@ export class QuestionService {
     // Check if course exists
     await this.courseService.findOne(createQuestionDto.courseId);
 
+    // Check for similar questions globally
+    const similarQuestion = await this.findSimilarQuestion(createQuestionDto);
+    if (similarQuestion) {
+      throw new ConflictException(
+        `Câu hỏi tương tự đã tồn tại (ID: ${similarQuestion.id}). ` +
+        `Nếu muốn cập nhật, hãy sử dụng endpoint upsert hoặc xóa câu hỏi cũ trước.`
+      );
+    }
+
     const question = this.questionRepository.create(createQuestionDto);
     const savedQuestion = await this.questionRepository.save(question);
-    
+
     // Invalidate related caches
     await this.invalidateRelatedCaches(createQuestionDto.courseId);
-    
+
     return savedQuestion;
   }
 
@@ -205,9 +214,26 @@ export class QuestionService {
               upsertedQuestions.push(updatedQuestion);
             }
           } else {
-            // Create new question
-            const question = await this.create(questionDto);
-            upsertedQuestions.push(question);
+            // Check for similar questions globally using cosine similarity
+            const similarQuestion = await this.findSimilarQuestion(questionDto);
+            if (similarQuestion) {
+              // Similar question found, update it instead of creating new
+              similarQuestion.questionHtml = questionDto.questionHtml;
+              similarQuestion.answersHtml = questionDto.answersHtml;
+              similarQuestion.correctAnswersHtml = questionDto.correctAnswersHtml;
+              similarQuestion.explanationHtml = questionDto.explanationHtml;
+              similarQuestion.updatedAt = new Date();
+
+              const updatedQuestion = await this.questionRepository.save(similarQuestion);
+              upsertedQuestions.push(updatedQuestion);
+              courseIds.add(similarQuestion.courseId);
+            } else {
+              // Create new question
+              const question = this.questionRepository.create(questionDto);
+              const savedQuestion = await this.questionRepository.save(question);
+              upsertedQuestions.push(savedQuestion);
+              courseIds.add(courseId);
+            }
           }
 
           courseIds.add(courseId);
@@ -224,6 +250,153 @@ export class QuestionService {
     }
 
     return upsertedQuestions;
+  }
+
+  private async findSimilarQuestion(createQuestionDto: CreateQuestionDto): Promise<Question | null> {
+    // Clean and normalize the new question content
+    const cleanNewQuestion = createQuestionDto.questionHtml
+      .replace(/<[^>]*>/g, '') // Remove HTML tags
+      .replace(/\s+/g, ' ')    // Normalize whitespace
+      .trim()
+      .toLowerCase();
+
+    const cleanNewAnswers = createQuestionDto.answersHtml
+      .join(' ')
+      .replace(/<[^>]*>/g, '') // Remove HTML tags
+      .replace(/\s+/g, ' ')    // Normalize whitespace
+      .trim()
+      .toLowerCase();
+
+    // Get all questions from database (limit to recent questions for performance)
+    const existingQuestions = await this.questionRepository.find({
+      select: ['id', 'questionHtml', 'answersHtml', 'correctAnswersHtml'],
+      order: { createdAt: 'DESC' },
+      take: 1000 // Limit to avoid performance issues
+    });
+
+    // Find similar questions using multiple similarity checks
+    for (const existing of existingQuestions) {
+      const cleanExistingQuestion = existing.questionHtml
+        .replace(/<[^>]*>/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+
+      const cleanExistingAnswers = existing.answersHtml
+        .join(' ')
+        .replace(/<[^>]*>/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+
+      // Check exact match first (most reliable)
+      if (cleanNewQuestion === cleanExistingQuestion &&
+          cleanNewAnswers === cleanExistingAnswers) {
+        return existing;
+      }
+
+      // Calculate comprehensive similarity score using Cosine Similarity
+      const questionSimilarity = this.cosineSimilarity(cleanNewQuestion, cleanExistingQuestion);
+      const answersSimilarity = this.cosineSimilarity(cleanNewAnswers, cleanExistingAnswers);
+
+      // Check if both question and answers are highly similar (70%+ match)
+      if (questionSimilarity > 0.7 && answersSimilarity > 0.7) {
+        return existing;
+      }
+
+      // Check correct answers similarity
+      const cleanNewCorrect = createQuestionDto.correctAnswersHtml
+        .join(' ')
+        .replace(/<[^>]*>/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+
+      const cleanExistingCorrect = existing.correctAnswersHtml
+        .join(' ')
+        .replace(/<[^>]*>/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+
+      const correctAnswersSimilarity = this.cosineSimilarity(cleanNewCorrect, cleanExistingCorrect);
+
+      // If question is very similar (80%+) and correct answers match well (60%+)
+      if (questionSimilarity > 0.8 && correctAnswersSimilarity > 0.6) {
+        return existing;
+      }
+
+      // Calculate overall similarity score (weighted average)
+      const overallSimilarity = (questionSimilarity * 0.6) + (answersSimilarity * 0.3) + (correctAnswersSimilarity * 0.1);
+
+      // If overall similarity is very high (85%+), consider it a duplicate
+      if (overallSimilarity > 0.85) {
+        return existing;
+      }
+    }
+
+    return null;
+  }
+
+  private cosineSimilarity(text1: string, text2: string): number {
+    if (text1 === text2) return 1.0;
+    if (!text1 || !text2) return 0.0;
+
+    // Tokenize texts (split by spaces and punctuation)
+    const tokens1 = this.tokenize(text1);
+    const tokens2 = this.tokenize(text2);
+
+    if (tokens1.length === 0 && tokens2.length === 0) return 1.0;
+    if (tokens1.length === 0 || tokens2.length === 0) return 0.0;
+
+    // Create term frequency maps
+    const tf1 = this.createTermFrequencyMap(tokens1);
+    const tf2 = this.createTermFrequencyMap(tokens2);
+
+    // Calculate dot product and magnitudes
+    let dotProduct = 0;
+    let magnitude1 = 0;
+    let magnitude2 = 0;
+
+    // Get all unique terms
+    const allTerms = new Set([...Object.keys(tf1), ...Object.keys(tf2)]);
+
+    for (const term of allTerms) {
+      const freq1 = tf1[term] || 0;
+      const freq2 = tf2[term] || 0;
+
+      dotProduct += freq1 * freq2;
+      magnitude1 += freq1 * freq1;
+      magnitude2 += freq2 * freq2;
+    }
+
+    magnitude1 = Math.sqrt(magnitude1);
+    magnitude2 = Math.sqrt(magnitude2);
+
+    if (magnitude1 === 0 || magnitude2 === 0) return 0.0;
+
+    return dotProduct / (magnitude1 * magnitude2);
+  }
+
+  private tokenize(text: string): string[] {
+    // Remove punctuation and split by whitespace
+    return text
+      .toLowerCase()
+      .replace(/[.,!?;:()[\]{}"']/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .split(' ')
+      .filter(token => token.length > 0);
+  }
+
+  private createTermFrequencyMap(tokens: string[]): { [key: string]: number } {
+    const tfMap: { [key: string]: number } = {};
+
+    for (const token of tokens) {
+      tfMap[token] = (tfMap[token] || 0) + 1;
+    }
+
+    return tfMap;
   }
 
   private createQuestionHash(questionHtml: string, answersHtml: string[]): string {

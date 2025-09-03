@@ -358,10 +358,19 @@ class QuestionExtractor {
       const hasCorrectImg = $d.querySelector('img[alt="Câu trả lời đúng"], img[alt="Correct answer"]') !== null;
 
       if (hasCorrectClass || hasCorrectImg) {
-        // Lấy toàn bộ HTML của div (theo logic jQuery)
-        const html = ($d.innerHTML || '').trim();
-        if (html) {
-          correctAnswersHTML.push(this.cleanAnswer(html));
+        // Lấy nội dung từ thẻ label và loại bỏ prefix
+        const label = $d.querySelector('label');
+        if (label) {
+          const labelHtml = (label.innerHTML || '').trim();
+          if (labelHtml) {
+            correctAnswersHTML.push(this.cleanAnswer(labelHtml));
+          }
+        } else {
+          // Fallback: Lấy toàn bộ HTML của div nếu không tìm thấy label
+          const html = ($d.innerHTML || '').trim();
+          if (html) {
+            correctAnswersHTML.push(this.cleanAnswer(html));
+          }
         }
       }
     });
@@ -379,8 +388,47 @@ class QuestionExtractor {
   }
 
   cleanAnswer(html) {
-    // Remove answer prefix like "a. ", "b. ", etc.
-    return html.replace(/^[a-d]\.\s*/i, '').trim();
+    // Remove answer prefix like "a. ", "b. ", etc. from text content
+    // But preserve HTML structure if present
+    let cleaned = html;
+
+    // If it's plain text, just remove prefix
+    if (!/<[^>]*>/.test(html)) {
+      return html.replace(/^[a-d]\.\s*/i, '').trim();
+    }
+
+    // If it contains HTML, try to clean the text content
+    // Create a temporary element to parse HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+
+    // Get text content and remove prefix
+    const textContent = tempDiv.textContent || tempDiv.innerText || '';
+    const cleanedText = textContent.replace(/^[a-d]\.\s*/i, '').trim();
+
+    // If text content changed, reconstruct HTML with cleaned text
+    if (textContent !== cleanedText) {
+      // Find the main text node or element containing the answer text
+      const textNodes = [];
+      const walk = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT, null, false);
+      let node;
+      while (node = walk.nextNode()) {
+        if (node.textContent && node.textContent.trim()) {
+          textNodes.push(node);
+        }
+      }
+
+      // Replace the first text node that contains the answer prefix
+      if (textNodes.length > 0) {
+        const firstTextNode = textNodes[0];
+        const originalText = firstTextNode.textContent || '';
+        const cleanedNodeText = originalText.replace(/^[a-d]\.\s*/i, '').trim();
+        firstTextNode.textContent = cleanedNodeText;
+        cleaned = tempDiv.innerHTML;
+      }
+    }
+
+    return cleaned.trim();
   }
 
   showAutoExtractNotification(reviewData, message) {

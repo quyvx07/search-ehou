@@ -26,6 +26,14 @@ export class CourseController {
     return await this.courseService.create(createCourseDto);
   }
 
+  @Post('upsert')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Create or update a course (upsert)' })
+  @ApiResponse({ status: 200, description: 'Course upserted successfully', type: Course })
+  async upsert(@Body() createCourseDto: CreateCourseDto): Promise<Course> {
+    return await this.courseService.upsert(createCourseDto);
+  }
+
   @Post('bulk-upsert')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Create or update multiple courses (bulk upsert)' })
