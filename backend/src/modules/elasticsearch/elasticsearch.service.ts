@@ -125,6 +125,7 @@ export class SearchService {
     courseCode?: string,
     size: number = 10,
   ): Promise<SearchResult[]> {
+
     try {
       const searchQuery: any = {
         bool: {
@@ -164,13 +165,20 @@ export class SearchService {
       };
 
       if (courseCode) {
+        // Use wildcard query to match course codes starting with the given code
+        // Example: "IT02" will match "IT02", "IT02.059", "IT02.023", etc.
         searchQuery.bool.filter = [
           {
-            term: {
-              course_code: courseCode,
-            },
-          },
+            wildcard: {
+              course_code: {
+                value: `${courseCode}*`,
+                case_insensitive: true
+              }
+            }
+          }
         ];
+
+        this.logger.log(`🔍 Searching with wildcard courseCode pattern: "${courseCode}*"`);
       }
 
       const result = await this.elasticsearchService.search({
@@ -229,12 +237,17 @@ export class SearchService {
       };
 
       if (courseCode) {
+        // Use wildcard query to match course codes starting with the given code
+        // Example: "IT02" will match "IT02", "IT02.059", "IT02.023", etc.
         searchQuery.bool.filter = [
           {
-            term: {
-              course_code: courseCode,
-            },
-          },
+            wildcard: {
+              course_code: {
+                value: `${courseCode}*`,
+                case_insensitive: true
+              }
+            }
+          }
         ];
       }
 
@@ -303,5 +316,48 @@ export class SearchService {
       this.logger.error(`Failed to get index stats: ${error.message}`);
       throw error;
     }
+  }
+
+  /**
+   * Generate multiple courseCode patterns for fuzzy matching
+   * Example: "IT02" -> ["IT02", "IT02.*", "IT02*"]
+   */
+  private generateCourseCodePatterns(courseCode: string): string[] {
+
+    const patterns = new Set<string>();
+
+    // Exact match
+    patterns.add(courseCode);
+
+    // Pattern with dot (IT02 -> IT02.*)
+    patterns.add(`${courseCode}.*`);
+
+    // Pattern with wildcard at end (IT02 -> IT02*)
+    patterns.add(`${courseCode}*`);
+
+    // Pattern with dash (IT02 -> IT02-*)
+    patterns.add(`${courseCode}-*`);
+
+    // Pattern with underscore (IT02 -> IT02_*)
+    patterns.add(`${courseCode}_*`);
+
+    // If courseCode has dots, also try base pattern
+    if (courseCode.includes('.')) {
+      const baseCode = courseCode.split('.')[0];
+      patterns.add(baseCode);
+      patterns.add(`${baseCode}.*`);
+      patterns.add(`${baseCode}*`);
+    }
+
+    // If courseCode has dashes, also try base pattern
+    if (courseCode.includes('-')) {
+      const baseCode = courseCode.split('-')[0];
+      patterns.add(baseCode);
+      patterns.add(`${baseCode}.*`);
+      patterns.add(`${baseCode}*`);
+    }
+
+    const result = Array.from(patterns);
+    return result;
   }
 }

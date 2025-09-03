@@ -26,8 +26,8 @@ export class SearchMatchDto {
   @ApiProperty({ description: 'Confidence score (0.0-1.0)' })
   confidenceScore: number;
 
-  @ApiProperty({ description: 'Match type: question, answer, or explanation' })
-  matchType: 'question' | 'answer' | 'explanation' | 'combined';
+  @ApiProperty({ description: 'Match type: question, answer, explanation, combined, exact, enhanced_keyword, or partial' })
+  matchType: 'question' | 'answer' | 'explanation' | 'combined' | 'exact' | 'enhanced_keyword' | 'partial';
 
   @ApiProperty({ description: 'Similarity percentage' })
   similarityPercentage: number;

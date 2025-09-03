@@ -9,13 +9,15 @@ import { CourseService } from './services/course.service';
 import { QuestionService } from './services/question.service';
 import { BulkSearchService } from './services/bulk-search.service';
 import { QuestionMatchingService } from './services/question-matching.service';
-// import { SearchModule } from '../elasticsearch/elasticsearch.module';
+import { EnhancedKeywordMatchingService } from './services/enhanced-keyword-matching.service';
+import { HybridSearchService } from './services/hybrid-search.service';
+import { SearchModule } from '../elasticsearch/elasticsearch.module';
 import { CacheService } from '../../common/services/cache.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Course, Question]),
-    // SearchModule,
+    SearchModule,
   ],
   controllers: [CourseController, QuestionController, QuestionMatchingController],
   providers: [
@@ -23,6 +25,8 @@ import { CacheService } from '../../common/services/cache.service';
     QuestionService,
     BulkSearchService,
     QuestionMatchingService,
+    EnhancedKeywordMatchingService,
+    HybridSearchService,
     CacheService,
     {
       provide: 'SearchService',
@@ -32,6 +36,6 @@ import { CacheService } from '../../common/services/cache.service';
       }
     }
   ],
-  exports: [CourseService, QuestionService, QuestionMatchingService],
+  exports: [CourseService, QuestionService, QuestionMatchingService, EnhancedKeywordMatchingService, HybridSearchService],
 })
 export class QuestionsModule {}

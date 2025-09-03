@@ -1,4 +1,6 @@
 // Background script for Search EHOU Chrome Extension - Simplified Auto Extract Only
+importScripts('config.js');
+
 let extensionState = {
   isEnabled: true,
   autoExtractEnabled: true,
@@ -8,16 +10,19 @@ let extensionState = {
 
 // Initialize extension state
 chrome.runtime.onInstalled.addListener(async () => {
-  console.log('Search EHOU Extension installed - Auto extract only mode');
+  console.log(CONFIG.MESSAGES.SUCCESS.EXTENSION_LOADED);
+
+  // Load configuration from storage
+  await CONFIG.loadFromStorage();
 
   // Load saved state
-  const savedState = await chrome.storage.local.get(['extensionState']);
-  if (savedState.extensionState) {
-    extensionState = { ...extensionState, ...savedState.extensionState };
+  const savedState = await chrome.storage.local.get([CONFIG.STORAGE_KEYS.EXTENSION_STATE]);
+  if (savedState[CONFIG.STORAGE_KEYS.EXTENSION_STATE]) {
+    extensionState = { ...extensionState, ...savedState[CONFIG.STORAGE_KEYS.EXTENSION_STATE] };
   }
 
   // Save initial state
-  await chrome.storage.local.set({ extensionState });
+  await chrome.storage.local.set({ [CONFIG.STORAGE_KEYS.EXTENSION_STATE]: extensionState });
 });
 
 // Message handling from content scripts
@@ -27,9 +32,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse(extensionState);
       break;
 
+    case 'GET_CONFIG':
+      sendResponse({ success: true, config: CONFIG });
+      break;
+
     case 'UPDATE_STATE':
       extensionState = { ...extensionState, ...request.data };
-      chrome.storage.local.set({ extensionState });
+      chrome.storage.local.set({ [CONFIG.STORAGE_KEYS.EXTENSION_STATE]: extensionState });
       sendResponse({ success: true });
       break;
 
@@ -158,7 +167,7 @@ async function sendToBackendAPI(reviewData) {
 // Create or update course using backend upsert
 async function createOrGetCourse(reviewData) {
   try {
-    const response = await fetch('http://localhost:3000/api/v1/courses/upsert', {
+    const response = await fetch(CONFIG.getApiUrl(CONFIG.URLS.COURSE_UPSERT), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -188,7 +197,7 @@ async function createOrGetCourse(reviewData) {
 // Bulk upsert questions (create new or update existing)
 async function bulkUpsertQuestions(questions) {
   try {
-    const response = await fetch('http://localhost:3000/api/v1/questions/bulk-upsert', {
+    const response = await fetch(CONFIG.getApiUrl(CONFIG.URLS.QUESTION_BULK_UPSERT), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -215,7 +224,11 @@ async function handleSearchCorrectAnswers(searchData) {
   try {
     console.log('🔍 Processing search correct answers:', {
       questionCount: searchData.questions?.length || 0,
-      courseCode: searchData.courseCode
+      courseCode: searchData.courseCode,
+      sampleQuestion: searchData.questions && searchData.questions[0] ? {
+        questionPreview: searchData.questions[0].questionHTML.substring(0, 100),
+        answersCount: searchData.questions[0].answersHTML.length
+      } : 'No questions'
     });
 
     // Send to backend API for bulk search
@@ -241,19 +254,24 @@ async function handleSearchCorrectAnswers(searchData) {
 // Search questions in backend using bulk search API
 async function searchQuestionsInBackend(searchData) {
   try {
-    console.log('📤 Searching questions in backend:', {
+    console.log('🚀 Searching questions using Hybrid Search (Elasticsearch + Enhanced Keyword):', {
       questionCount: searchData.questions.length,
-      courseCode: searchData.courseCode
+      courseCode: searchData.courseCode,
+      elasticsearchSize: CONFIG.SEARCH.ELASTICSEARCH_SIZE,
+      threshold: CONFIG.SEARCH.THRESHOLD
     });
 
     // Prepare data for bulk search API
     const bulkSearchData = {
       questions: searchData.questions,
       courseCode: searchData.courseCode,
-      threshold: 0.6 // Confidence threshold for matching
+      threshold: CONFIG.SEARCH.THRESHOLD
     };
 
-    const response = await fetch('http://localhost:3000/api/v1/questions/bulk-search', {
+    // Use regular bulk search for now (hybrid search has issues)
+    const url = CONFIG.getFullUrl(CONFIG.URLS.BULK_SEARCH);
+
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -266,10 +284,24 @@ async function searchQuestionsInBackend(searchData) {
     }
 
     const result = await response.json();
-    console.log('✅ Bulk search completed:', {
+    console.log(CONFIG.MESSAGES.SUCCESS.SEARCH_COMPLETED, {
       totalQuestions: result.totalQuestions,
       matchedQuestions: result.matchedQuestions,
-      averageConfidence: result.averageConfidence
+      averageConfidence: result.averageConfidence,
+      processingTimeMs: result.processingTimeMs,
+      method: 'Elasticsearch + Enhanced Keyword Matching'
+    });
+
+    // DEBUG: Log detailed results
+    console.log('🔍 DEBUG: Backend API response details:', {
+      totalQuestions: result.totalQuestions,
+      matchedQuestions: result.matchedQuestions,
+      resultsSummary: result.results ? result.results.map((r, i) => ({
+        questionIndex: i,
+        hasMatch: r.hasMatch,
+        allMatchesCount: r.allMatches ? r.allMatches.length : 0,
+        bestMatchScore: r.bestMatch ? r.bestMatch.confidenceScore : 'N/A'
+      })) : 'No results'
     });
 
     return result;

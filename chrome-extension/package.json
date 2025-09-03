@@ -1,48 +1,57 @@
 {
   "name": "search-ehou-chrome-extension",
-  "version": "1.0.0",
-  "description": "Chrome Extension for collecting and auto-filling questions from online quizzes",
-  "main": "dist/background.js",
+  "version": "2.1.0",
+  "description": "Chrome extension for auto extracting and filling quiz answers using Hybrid Search (Elasticsearch + Enhanced Keyword Matching)",
+  "main": "background.js",
   "scripts": {
-    "build": "npm run clean && npm run setup && npm run minify && npm run copy-assets",
-    "build:dev": "npm run clean && npm run setup && npm run copy-assets",
-    "clean": "rimraf dist",
-    "setup": "mkdir -p dist/icons",
-    "minify": "npm run minify:js && npm run minify:css && npm run minify:html",
-    "minify:js": "terser background.js -o dist/background.js --compress --mangle && terser popup.js -o dist/popup.js --compress --mangle && terser content.js -o dist/content.js --compress --mangle && terser security-config.js -o dist/security-config.js --compress --mangle",
-    "minify:css": "cleancss popup.css -o dist/popup.css",
-    "minify:html": "html-minifier-terser popup.html -o dist/popup.html --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true",
-    "copy-assets": "cp -r icons dist/ && copyfiles manifest.json dist/",
-    "watch": "nodemon --watch . --ext js,css,html --ignore dist/ --ignore node_modules/ --ignore .yarn/ --exec 'npm run build:dev'",
-    "test": "jest",
-    "lint": "eslint *.js --ignore-pattern 'dist/*' --ignore-pattern 'node_modules/*' --ignore-pattern '.yarn/*'",
-    "lint:fix": "eslint *.js --ignore-pattern 'dist/*' --ignore-pattern 'node_modules/*' --ignore-pattern '.yarn/*' --fix",
-    "security-audit": "npm audit && npm run lint",
-    "package": "npm run build && cd dist && zip -r ../search-ehou-extension.zip ."
+    "build": "node build.js",
+    "dev": "node build.js && echo 'Extension built. Load dist/ folder in Chrome'",
+    "test": "echo 'Use Chrome DevTools Console to test CONFIG object'",
+    "clean": "rm -rf dist/",
+    "rebuild": "npm run clean && npm run build",
+    "lint": "echo 'No linter configured yet'",
+    "package": "cd dist && zip -r ../search-ehou-extension.zip ."
   },
   "keywords": [
     "chrome-extension",
     "quiz",
     "auto-fill",
     "education",
-    "search"
+    "ehou",
+    "hybrid-search",
+    "elasticsearch",
+    "keyword-matching"
   ],
   "author": "Search EHOU Team",
   "license": "MIT",
-  "devDependencies": {
-    "clean-css-cli": "^5.6.2",
-    "copyfiles": "^2.4.1",
-    "eslint": "^8.56.0",
-    "jest": "^29.7.0",
-    "nodemon": "^3.0.2",
-    "rimraf": "^5.0.5",
-    "terser": "^5.24.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/search-ehou/extension"
   },
+  "bugs": {
+    "url": "https://github.com/search-ehou/extension/issues"
+  },
+  "homepage": "https://github.com/search-ehou/extension#readme",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=14.0.0"
   },
-  "packageManager": "yarn@4.9.2+sha512.1fc009bc09d13cfd0e19efa44cbfc2b9cf6ca61482725eb35bbc5e257e093ebf4130db6dfe15d604ff4b79efd8e1e8e99b25fa7d0a6197c9f9826358d4d65c3c",
-  "dependencies": {
-    "html-minifier-terser": "^7.2.0"
+  "extension": {
+    "manifest_version": 3,
+    "permissions": [
+      "activeTab",
+      "storage"
+    ],
+    "host_permissions": [
+      "http://localhost:3000/*",
+      "https://*.ehou.edu.vn/*"
+    ]
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "config": {
+    "api_base_url": "http://localhost:3000/api/v1",
+    "search_threshold": 0.6,
+    "elasticsearch_size": 20,
+    "timeout": 30000
   }
 }

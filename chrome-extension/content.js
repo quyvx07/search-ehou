@@ -1,4 +1,30 @@
 // Content script for Search EHOU Chrome Extension - Simplified Auto Extract Only
+
+// Config helper for content scripts
+let extensionConfig = null;
+
+async function getExtensionConfig() {
+  if (extensionConfig) return extensionConfig;
+
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ action: 'GET_CONFIG' }, (response) => {
+      if (response && response.success) {
+        extensionConfig = response.config;
+        resolve(extensionConfig);
+      } else {
+        reject(new Error('Failed to get extension config'));
+      }
+    });
+  });
+}
+
+// Message listener for content script
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === 'CONTENT_SCRIPT_READY') {
+    sendResponse({ success: true });
+  }
+});
+
 class QuestionExtractor {
   constructor() {
     this.isExtracting = false;
@@ -7,15 +33,28 @@ class QuestionExtractor {
     this.init();
   }
 
-  init() {
-    // Setup message listeners
-    this.setupMessageListeners();
+  async init() {
+    try {
+      // Load extension config first
+      const config = await getExtensionConfig();
+      console.log(config.MESSAGES.INFO.LOADING, 'Search EHOU Extension');
 
-    // Load extension state
-    this.loadExtensionState();
+      // Setup message listeners
+      this.setupMessageListeners();
 
-    // Only keep the auto extract functionality
-    this.detectAndAutoExtractReviewPage();
+      // Load extension state
+      this.loadExtensionState();
+
+      // Only keep the auto extract functionality
+      this.detectAndAutoExtractReviewPage();
+      
+      // Add auto fill button for quiz pages (with delay for DOM loading)
+      setTimeout(() => {
+        this.addAutoFillButton();
+      }, 1000);
+    } catch (error) {
+      console.error('Failed to initialize extension:', error);
+    }
   }
 
   detectAndAutoExtractReviewPage() {
@@ -264,6 +303,7 @@ class QuestionExtractor {
 
     if (courseElement) {
       const courseFull = courseElement.textContent.trim();
+      console.log('🔍 DEBUG: Course extraction - Full text:', courseFull);
       courseName = courseFull;
       courseCode = '';
 
@@ -272,7 +312,24 @@ class QuestionExtractor {
         const parts = courseFull.split(' - ');
         courseName = parts[0].trim();
         courseCode = parts[1].trim();
+        console.log('🔍 DEBUG: Course extraction - Split result:', {
+          courseName: courseName,
+          courseCode: courseCode,
+          originalParts: parts
+        });
+      } else {
+        console.log('🔍 DEBUG: Course extraction - No separator found, using full text as name');
       }
+    }
+
+    // Normalize courseCode - remove part after dot (e.g., "IT02.059" -> "IT02")
+    if (courseCode && courseCode.includes('.')) {
+      const normalizedCode = courseCode.split('.')[0];
+      console.log('🔍 DEBUG: Course code normalized:', {
+        original: courseCode,
+        normalized: normalizedCode
+      });
+      courseCode = normalizedCode;
     }
 
     return {
@@ -515,13 +572,27 @@ class QuestionExtractor {
         const answersFound = await this.searchCorrectAnswers(quizData);
 
         if (answersFound && answersFound.length > 0) {
+          console.log('✅ DEBUG: Found answers for questions:', answersFound.map(a => ({
+            questionIndex: a.questionIndex + 1,
+            matchScore: a.matchScore,
+            confidence: a.confidence,
+            correctAnswersCount: a.correctAnswers.length
+          })));
+
           // Fill in the answers
           const filledCount = this.fillAnswers(answersFound);
+
+          console.log('✅ DEBUG: Fill results:', {
+            answersFound: answersFound.length,
+            filledCount: filledCount,
+            totalQuestions: quizData.questions.length,
+            successRate: `${((filledCount / quizData.questions.length) * 100).toFixed(1)}%`
+          });
 
           // Không hiển thị thông báo khi điền thành công (theo yêu cầu)
           // this.showAutoFillNotification(filledCount, quizData.questions.length);
         } else {
-          console.log('⚠️ No correct answers found in database');
+          console.log('⚠️ No correct answers found in database - All questions had low confidence or no matches');
           // Không hiển thị thông báo khi không tìm thấy đáp án (theo yêu cầu)
           // this.showAutoFillNotification(0, quizData.questions.length);
         }
@@ -615,13 +686,30 @@ class QuestionExtractor {
   // Search for correct answers in backend
   async searchCorrectAnswers(quizData) {
     try {
-      console.log('🔍 Searching for correct answers...');
+      const config = await getExtensionConfig();
+      console.log(config.MESSAGES.INFO.SEARCHING, 'using Hybrid Search (Elasticsearch + Enhanced Keyword Matching)');
 
-      // Prepare questions for bulk search
+      // Prepare questions for hybrid search (including both questions and answers)
       const questionsForSearch = quizData.questions.map(q => ({
         questionHTML: q.questionHTML,
         answersHTML: q.answersHTML
       }));
+
+      console.log('🔍 DEBUG: Questions prepared for search:', {
+        totalQuestions: questionsForSearch.length,
+        courseCode: quizData.courseCode,
+        sampleQuestion: questionsForSearch[0], // Log câu hỏi đầu tiên để debug
+        allQuestions: questionsForSearch.map((q, i) => ({
+          index: i,
+          questionPreview: q.questionHTML.substring(0, 100) + '...',
+          answerCount: q.answersHTML.length
+        }))
+      });
+
+      // Use original courseCode - backend now handles wildcard search
+      // Example: IT02.059 will find IT02, IT02.059, IT02.023, etc.
+      const courseCode = quizData.courseCode;
+      console.log('🔍 DEBUG: Using courseCode for wildcard search:', courseCode);
 
       // Send to background script for API call
       const response = await new Promise((resolve, reject) => {
@@ -629,7 +717,7 @@ class QuestionExtractor {
           action: 'SEARCH_CORRECT_ANSWERS',
           data: {
             questions: questionsForSearch,
-            courseCode: quizData.courseCode
+            courseCode: courseCode
           }
         }, (response) => {
           if (response && response.success) {
@@ -642,6 +730,27 @@ class QuestionExtractor {
 
       console.log('✅ Search results:', response);
 
+      // DEBUG: Log detailed results for each question
+      if (response && response.results) {
+        console.log('🔍 DEBUG: Detailed search results for each question:');
+        response.results.forEach((result, index) => {
+          console.log(`Question ${index + 1}:`, {
+            hasMatch: result.hasMatch,
+            allMatchesCount: result.allMatches ? result.allMatches.length : 0,
+            bestMatchScore: result.bestMatch ? result.bestMatch.confidenceScore : 'N/A',
+            originalQuestionPreview: result.originalQuestion ? result.originalQuestion.substring(0, 100) : 'N/A'
+          });
+
+          if (result.allMatches && result.allMatches.length > 0) {
+            console.log(`  └─ All matches for question ${index + 1}:`, result.allMatches.map(match => ({
+              confidenceScore: match.confidenceScore,
+              matchScore: match.matchScore,
+              questionPreview: match.questionHtml ? match.questionHtml.substring(0, 50) : 'N/A'
+            })));
+          }
+        });
+      }
+
       // Process results and match with quiz questions using improved algorithm
       const answersFound = [];
       if (response && response.results) {
@@ -653,6 +762,15 @@ class QuestionExtractor {
 
             // Find best match using improved algorithm
             const bestMatch = this.findBestMatch(currentQuestion, result.allMatches || [result.bestMatch]);
+
+            console.log(`🔍 DEBUG: Best match for question ${index + 1}:`, {
+              found: bestMatch ? true : false,
+              matchScore: bestMatch ? bestMatch.matchScore : 'N/A',
+              confidenceScore: bestMatch ? bestMatch.confidenceScore : 'N/A',
+              threshold: 0.6,
+              willUse: bestMatch && (bestMatch.matchScore >= 0.6) ? true : false,
+              correctAnswersCount: bestMatch ? bestMatch.correctAnswersHtml.length : 0
+            });
 
             if (bestMatch) {
               answersFound.push({
@@ -750,8 +868,8 @@ class QuestionExtractor {
           }
         }
 
-        // Fill answer if similarity is high enough (based on confidence)
-        const threshold = Math.max(0.7, confidence * 0.9); // Dynamic threshold based on confidence
+        // Fill answer if similarity is high enough (minimum 50%)
+        const threshold = 0.5; // Fixed 50% threshold - no exceptions
         if (bestMatch && bestSimilarity >= threshold) {
           // Check the input
           bestMatch.input.checked = true;
@@ -802,6 +920,89 @@ class QuestionExtractor {
     const tmp = document.createElement("DIV");
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
+  }
+
+  // Generate multiple courseCode variants for better matching
+  generateCourseCodeVariants(originalCode) {
+    if (!originalCode) return [''];
+
+    const variants = new Set();
+    variants.add(originalCode); // Original code
+
+    // Remove parts after dot (IT02.059 -> IT02)
+    if (originalCode.includes('.')) {
+      const baseCode = originalCode.split('.')[0];
+      variants.add(baseCode);
+    }
+
+    // Remove parts after dash (IT02-001 -> IT02)
+    if (originalCode.includes('-')) {
+      const baseCode = originalCode.split('-')[0];
+      variants.add(baseCode);
+    }
+
+    // Remove parts after underscore (IT02_001 -> IT02)
+    if (originalCode.includes('_')) {
+      const baseCode = originalCode.split('_')[0];
+      variants.add(baseCode);
+    }
+
+    // Remove numbers at the end (IT02123 -> IT02)
+    const withoutNumbers = originalCode.replace(/\d+$/, '');
+    if (withoutNumbers !== originalCode && withoutNumbers.length > 0) {
+      variants.add(withoutNumbers);
+    }
+
+    // Convert to uppercase
+    variants.add(originalCode.toUpperCase());
+
+    // Remove spaces and special characters
+    const cleanCode = originalCode.replace(/[^a-zA-Z0-9]/g, '');
+    if (cleanCode !== originalCode) {
+      variants.add(cleanCode);
+    }
+
+    // Common patterns: IT02, CS01, etc.
+    const letterNumberPattern = originalCode.match(/^([A-Za-z]+)(\d+)(.*)$/);
+    if (letterNumberPattern) {
+      const [_, letters, numbers] = letterNumberPattern;
+      variants.add(letters + numbers); // IT02
+      variants.add(letters.toUpperCase() + numbers); // IT02
+
+      // Also try with just 2 digits (IT02123 -> IT02)
+      if (numbers.length > 2) {
+        variants.add(letters + numbers.substring(0, 2));
+        variants.add(letters.toUpperCase() + numbers.substring(0, 2));
+      }
+    }
+
+    // Handle year patterns (IT02.2023 -> IT02)
+    const yearPattern = originalCode.match(/^([A-Za-z]+\d+)\.(\d{4})$/);
+    if (yearPattern) {
+      variants.add(yearPattern[1]); // IT02
+    }
+
+    // Handle semester patterns (IT02.1 -> IT02)
+    const semesterPattern = originalCode.match(/^([A-Za-z]+\d+)\.(\d)$/);
+    if (semesterPattern) {
+      variants.add(semesterPattern[1]); // IT02
+    }
+
+    // Common Vietnamese university course codes
+    const commonPrefixes = ['IT', 'CS', 'SE', 'IS', 'CE', 'EE', 'ME', 'BE', 'CH', 'PH', 'MA', 'EN', 'HI', 'GE'];
+    for (const prefix of commonPrefixes) {
+      if (originalCode.toUpperCase().startsWith(prefix)) {
+        // Extract number part
+        const numberMatch = originalCode.match(new RegExp(`^${prefix}(\\d+)`));
+        if (numberMatch) {
+          variants.add(prefix + numberMatch[1]);
+          variants.add(prefix.toLowerCase() + numberMatch[1]);
+        }
+      }
+    }
+
+    // Return unique variants as array, prioritize shorter codes first
+    return Array.from(variants).filter(code => code.length > 0).sort((a, b) => a.length - b.length);
   }
 
   // Extract answer texts from current question for better matching
@@ -996,6 +1197,142 @@ class QuestionExtractor {
     }, 5000);
 
     document.body.appendChild(notification);
+  }
+
+  // Add auto fill button for quiz pages
+  addAutoFillButton() {
+    // Only add button on quiz attempt pages
+    const isQuizPage = window.location.href.includes('/mod/quiz/attempt.php');
+    if (!isQuizPage) return;
+
+    // Check if button already exists
+    if (document.getElementById('ehou-auto-fill-btn')) return;
+
+    // Try to find the specific container first
+    let targetContainer = document.querySelector('#mCSB_2_container .tab-content');
+    
+    // If not found, try alternative selectors
+    if (!targetContainer) {
+      targetContainer = document.querySelector('.tab-content');
+    }
+    
+    // If still not found, fallback to quiz navigation area
+    if (!targetContainer) {
+      targetContainer = document.querySelector('#mod_quiz_navblock .content');
+    }
+    
+    // Last fallback to document body
+    if (!targetContainer) {
+      targetContainer = document.body;
+    }
+
+    // Create auto fill button container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.id = 'ehou-auto-fill-container';
+    buttonContainer.style.cssText = `
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(102, 126, 234, 0.1);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    `;
+
+    // Create auto fill button
+    const autoFillBtn = document.createElement('button');
+    autoFillBtn.id = 'ehou-auto-fill-btn';
+    autoFillBtn.innerHTML = '🤖 Auto làm bài';
+    autoFillBtn.style.cssText = `
+      width: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    `;
+
+    // Hover effects
+    autoFillBtn.addEventListener('mouseenter', () => {
+      autoFillBtn.style.transform = 'translateY(-1px)';
+      autoFillBtn.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+    });
+
+    autoFillBtn.addEventListener('mouseleave', () => {
+      autoFillBtn.style.transform = 'translateY(0)';
+      autoFillBtn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+    });
+
+    // Click handler
+    autoFillBtn.addEventListener('click', async () => {
+      try {
+        autoFillBtn.disabled = true;
+        autoFillBtn.innerHTML = '🔄 Đang làm bài...';
+        autoFillBtn.style.background = '#6c757d';
+        
+        await this.autoFillQuiz();
+        
+        autoFillBtn.innerHTML = '✅ Hoàn thành!';
+        autoFillBtn.style.background = '#28a745';
+        
+        setTimeout(() => {
+          autoFillBtn.disabled = false;
+          autoFillBtn.innerHTML = '🤖 Auto làm bài';
+          autoFillBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        }, 3000);
+        
+      } catch (error) {
+        console.error('❌ Auto fill error:', error);
+        autoFillBtn.innerHTML = '❌ Lỗi';
+        autoFillBtn.style.background = '#dc3545';
+        
+        setTimeout(() => {
+          autoFillBtn.disabled = false;
+          autoFillBtn.innerHTML = '🤖 Auto làm bài';
+          autoFillBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        }, 3000);
+      }
+    });
+
+    // Add description text
+    const description = document.createElement('p');
+    description.innerHTML = '📝 Tự động tìm và điền đáp án đúng cho tất cả câu hỏi';
+    description.style.cssText = `
+      margin: 8px 0 0 0;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    `;
+
+    // Assemble container
+    buttonContainer.appendChild(autoFillBtn);
+    buttonContainer.appendChild(description);
+
+    // Add to target container
+    if (targetContainer === document.body) {
+      // For body, use fixed positioning
+      buttonContainer.style.cssText += `
+        position: fixed;
+        top: 120px;
+        right: 20px;
+        z-index: 10000;
+        width: 200px;
+      `;
+    } else {
+      // For specific containers, use relative positioning
+      targetContainer.insertBefore(buttonContainer, targetContainer.firstChild);
+    }
+    
+    if (targetContainer === document.body) {
+      targetContainer.appendChild(buttonContainer);
+    }
+    
+    console.log('✅ Auto fill button added to quiz page in container:', targetContainer.className || targetContainer.tagName);
   }
 }
 

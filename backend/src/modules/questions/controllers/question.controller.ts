@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { QuestionService } from '../services/question.service';
+import { HybridSearchService } from '../services/hybrid-search.service';
 import { CreateQuestionDto } from '../dto/create-question.dto';
 import { CreateQuizDto } from '../dto/create-quiz.dto';
 import { BulkSearchDto } from '../dto/bulk-search.dto';
@@ -19,7 +20,10 @@ import { Question } from '../entities/question.entity';
 @ApiTags('Questions')
 @Controller('questions')
 export class QuestionController {
-  constructor(private readonly questionService: QuestionService) {}
+  constructor(
+    private readonly questionService: QuestionService,
+    private readonly hybridSearchService: HybridSearchService,
+  ) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -88,5 +92,30 @@ export class QuestionController {
   @ApiResponse({ status: 200, description: 'Bulk search results', type: BulkSearchResponseDto })
   async bulkSearch(@Body() bulkSearchDto: BulkSearchDto): Promise<BulkSearchResponseDto> {
     return await this.questionService.bulkSearch(bulkSearchDto);
+  }
+
+  @Post('hybrid-bulk-search')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Hybrid bulk search using Elasticsearch + Enhanced Keyword Matching',
+    description: 'Combines Elasticsearch for rough matching with enhanced keyword matching for precision. Optimized for 4GB RAM systems.'
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Hybrid search results with enhanced accuracy',
+    type: BulkSearchResponseDto
+  })
+  async hybridBulkSearch(
+    @Body() bulkSearchDto: BulkSearchDto,
+    @Query('elasticsearchSize') elasticsearchSize: string = '20',
+    @Query('threshold') threshold: string = '0.6'
+  ): Promise<BulkSearchResponseDto> {
+    const options = {
+      elasticsearchSize: parseInt(elasticsearchSize),
+      threshold: parseFloat(threshold),
+      courseCode: bulkSearchDto.courseCode,
+    };
+
+    return await this.hybridSearchService.hybridBulkSearch(bulkSearchDto, options);
   }
 }

@@ -68,7 +68,7 @@ export class BulkSearchService {
   private async searchSingleQuestion(
     questionItem: QuestionSearchItemDto,
     courseCode?: string,
-    threshold: number = 0.7,
+    threshold: number = 0.2,
     questionIndex: number = 0,
   ): Promise<BulkSearchResultDto> {
     const normalizedQuestion = this.normalizeVietnameseText(questionItem.questionHTML);
@@ -82,11 +82,25 @@ export class BulkSearchService {
       .leftJoinAndSelect('question.course', 'course');
 
     if (courseCode) {
-      query = query.andWhere('course.courseCode = :courseCode', { courseCode });
+      // Use LIKE with wildcard to match course codes starting with the given code
+      // Example: "IT02" will match "IT02", "IT02.059", "IT02.023", etc.
+      query = query.andWhere('course.courseCode LIKE :courseCodePattern', { 
+        courseCodePattern: `${courseCode}%` 
+      });
     }
 
     // Get all potential matches
     const potentialMatches = await query.getMany();
+    
+    console.log('🔍 DEBUG: Bulk search potential matches:', {
+      courseCode,
+      totalMatches: potentialMatches.length,
+      firstMatch: potentialMatches[0] ? {
+        id: potentialMatches[0].id,
+        courseCode: potentialMatches[0].course?.courseCode,
+        questionPreview: potentialMatches[0].questionHtml?.substring(0, 100)
+      } : null
+    });
 
     // Calculate similarity scores
     const matches: SearchMatchDto[] = [];

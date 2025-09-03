@@ -37,6 +37,12 @@
     "128": "icons/icon128.png"
   },
 
+  "web_accessible_resources": [
+    {
+      "resources": ["config.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:3000 https://*.ehou.edu.vn;"
   }
